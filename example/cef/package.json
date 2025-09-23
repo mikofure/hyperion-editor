@@ -1,0 +1,26 @@
+{
+  "name": "cef-quickstart",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "webapp"
+  ],
+  "scripts": {
+    "dev": "bun --cwd webapp dev",
+    "build": "bun --cwd webapp vite build",
+    "preview": "bun --cwd webapp run preview",
+    "build:cmake": "bun run tools/build.ts",
+    "build:win": "bun run build && bun run buildtobin && bun run build:cmake",
+    "clean:cmake": "bun run tools/clean.ts",
+    "buildtobin": "bun run tools/utils/buildtobin.ts",
+    "iconconvert": "bun run tools/utils/iconconvert.ts"
+  },
+  "dependencies": {
+    "@types/node": "latest",
+    "glob": "^11.0.3"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "typescript": "latest"
+  }
+}
