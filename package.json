@@ -1,0 +1,47 @@
+{
+  "name": "mikoeditor",
+  "version": "1.0.0",
+  "description": "A modern text editor library built with TypeScript",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "private": false,
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "echo \"Tests not configured yet\"",
+    "example": "echo \"See src/test/example.ts for usage examples\""
+  },
+  "keywords": [
+    "text-editor",
+    "typescript",
+    "syntax-highlighting",
+    "code-editor",
+    "canvas",
+    "editor"
+  ],
+  "author": "MikoEditor Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.0.0",
+    "vite": "^7.1.7"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "tailwindcss": "^4.1.13",
+    "vite-plugin-singlefile": "^2.3.0"
+  }
+}
