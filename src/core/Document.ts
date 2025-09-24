@@ -8,7 +8,11 @@ export class Document {
   private historyIndex: number = -1;
 
   constructor(content: string = '') {
-    this.lines = content.split('\n');
+    this.lines = content ? content.split('\n') : [''];
+    // Ensure we always have at least one line
+    if (this.lines.length === 0) {
+      this.lines = [''];
+    }
   }
 
   /**
@@ -23,7 +27,7 @@ export class Document {
    */
   getLine(lineIndex: number): string {
     if (lineIndex < 0 || lineIndex >= this.lines.length) {
-      throw new Error(`Line index ${lineIndex} is out of bounds`);
+      return '';  // Return empty string instead of throwing error
     }
     const line = this.lines[lineIndex];
     return line ?? '';
@@ -40,9 +44,12 @@ export class Document {
    * Insert text at the specified position
    */
   insertText(position: Position, text: string): void {
+    // Validate position bounds
+    const validatedPosition = this.validatePosition(position);
+    
     const action: DocumentAction = {
       type: 'insert',
-      position,
+      position: validatedPosition,
       text,
       timestamp: Date.now()
     };
@@ -55,10 +62,13 @@ export class Document {
    * Delete text from the specified range
    */
   deleteText(range: Range): string {
-    const deletedText = this.getTextInRange(range);
+    // Validate range bounds
+    const validatedRange = this.validateRange(range);
+    const deletedText = this.getTextInRange(validatedRange);
+    
     const action: DocumentAction = {
       type: 'delete',
-      position: range.start,
+      position: validatedRange.start,
       text: deletedText,
       timestamp: Date.now()
     };
@@ -225,17 +235,56 @@ export class Document {
   }
 
   private addToHistory(action: DocumentAction): void {
-    // Remove any actions after the current position
-    this.history.splice(this.historyIndex + 1);
+    // Remove any actions after current position (for redo functionality)
+    if (this.historyIndex < this.history.length - 1) {
+      this.history.splice(this.historyIndex + 1);
+    }
+
     this.history.push(action);
-    this.historyIndex++;
-    
-    // Limit history size
+    this.historyIndex = this.history.length - 1;
+
+    // Limit history size to prevent memory issues
     const maxHistorySize = 1000;
     if (this.history.length > maxHistorySize) {
-      this.history.splice(0, this.history.length - maxHistorySize);
-      this.historyIndex = this.history.length - 1;
+      this.history.shift();
+      this.historyIndex--;
     }
+  }
+
+  /**
+   * Validate and clamp position to document bounds
+   */
+  private validatePosition(position: Position): Position {
+    // Ensure we have valid input
+    if (typeof position.line !== 'number' || typeof position.column !== 'number') {
+      return { line: 0, column: 0 };
+    }
+    
+    // Ensure we have at least one line
+    if (this.lines.length === 0) {
+      this.lines = [''];
+    }
+    
+    const line = Math.max(0, Math.min(position.line, this.lines.length - 1));
+    const currentLine = this.lines[line] ?? '';
+    const column = Math.max(0, Math.min(position.column, currentLine.length));
+    
+    return { line, column };
+  }
+
+  /**
+   * Validate and clamp range to document bounds
+   */
+  private validateRange(range: Range): Range {
+    const start = this.validatePosition(range.start);
+    const end = this.validatePosition(range.end);
+    
+    // Ensure start comes before end
+    if (start.line > end.line || (start.line === end.line && start.column > end.column)) {
+      return { start: end, end: start };
+    }
+    
+    return { start, end };
   }
 }
 

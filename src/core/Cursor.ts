@@ -31,9 +31,16 @@ export class Cursor {
   /**
    * Move the cursor by the specified offset
    */
-  move(deltaLine: number, deltaColumn: number): void {
-    this.position.line = Math.max(0, this.position.line + deltaLine);
-    this.position.column = Math.max(0, this.position.column + deltaColumn);
+  move(deltaLine: number, deltaColumn: number, maxLine?: number, maxColumn?: number): void {
+    const newLine = this.position.line + deltaLine;
+    const newColumn = this.position.column + deltaColumn;
+    
+    // Ensure line is within bounds
+    this.position.line = Math.max(0, maxLine !== undefined ? Math.min(newLine, maxLine) : newLine);
+    
+    // Ensure column is within bounds
+    this.position.column = Math.max(0, maxColumn !== undefined ? Math.min(newColumn, maxColumn) : newColumn);
+    
     this.clearSelection();
     this.notifyListeners();
   }

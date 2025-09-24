@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MikoEditor Demo - Dark Theme</title>
+    <link rel="stylesheet" href="./index.css">
+    <style>
+        /* Dark Theme Variables */
+        :root {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-tertiary: #16213e;
+            --bg-card: #1e1e3f;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-accent: #60a5fa;
+            --border-color: #334155;
+            --border-accent: #475569;
+            --button-bg: #374151;
+            --button-hover: #4b5563;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Light Theme Variables */
+        .light-theme {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-accent: #3b82f6;
+            --border-color: #e2e8f0;
+            --border-accent: #cbd5e1;
+            --button-bg: #f1f5f9;
+            --button-hover: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: var(--gradient);
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(40px);
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Language Controls */
+        .language-controls {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .language-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .language-select {
+            padding: 0.5rem 1rem;
+            background: var(--button-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .context-menu-demo {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .context-menu-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--button-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .context-menu-btn:hover {
+            background: var(--button-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Editor Grid */
+        .editor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .editor-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .editor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .editor-header {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .editor-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .editor-controls {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            background: var(--button-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--button-hover);
+            transform: translateY(-1px);
+        }
+
+        .select {
+            padding: 0.5rem 1rem;
+            background: var(--button-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .cursor-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+            padding-left: 1rem;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .cursor-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .editor-container {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .features-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .editor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .editor-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cursor-controls {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+                padding-top: 0.75rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .editor-card,
+        .features {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .editor-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .features {
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-controls">
+        <span class="language-label">🌐 Language:</span>
+        <select class="language-select" onchange="changeUILanguage(this.value)">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="th">ไทย</option>
+        </select>
+    </div>
+
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text">Dark Mode</span>
+    </div>
+
+    <div class="context-menu-demo">
+        <button class="context-menu-btn" onclick="showContextMenuDemo(event)">
+            📋 Show Context Menu
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎯 MikoEditor</h1>
+            <p class="subtitle">A modern, powerful text editor library built with TypeScript</p>
+        </div>
+        
+        <div class="editor-grid">
+            <!-- Primary Editor -->
+            <div class="editor-card">
+                <div class="editor-header">
+                    <h3 class="editor-title">🚀 Primary Editor - TypeScript</h3>
+                </div>
+                <div class="editor-controls">
+                    <button class="btn" onclick="insertSampleTS()">Insert Sample</button>
+                    <button class="btn" onclick="clearEditor1()">Clear</button>
+                    <button class="btn" onclick="undoEditor1()">Undo</button>
+                    <button class="btn" onclick="redoEditor1()">Redo</button>
+                    <select class="select" onchange="changeLanguage1(this.value)">
+                        <option value="typescript">TypeScript</option>
+                        <option value="thai-typescript">TypeScript (ไทย)</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="json">JSON</option>
+                    </select>
+                    <select class="select" onchange="changeTheme1(this.value)">
+                        <option value="default">Default</option>
+                        <option value="nekodark">Neko Dark</option>
+                        <option value="sunlight">Sunlight</option>
+                        <option value="cutie">Cutie</option>
+                        <option value="extradark">Extra Dark</option>
+                        <option value="moondark">Moon Dark</option>
+                        <option value="nekolight">Neko Light</option>
+                        <option value="vanilla">Vanilla</option>
+                    </select>
+                    <div class="cursor-controls">
+                        <span class="cursor-label">Cursor:</span>
+                        <select class="select" onchange="setCursorAnimation1(this.value)">
+                            <option value="fade">Fade</option>
+                            <option value="blink">Blink</option>
+                            <option value="pulse">Pulse</option>
+                        </select>
+                        <label class="cursor-label">
+                            <input type="checkbox" onchange="toggleSubpixel1(this.checked)" checked> Subpixel
+                        </label>
+                        <label class="cursor-label">
+                            <input type="checkbox" onchange="toggleSmoothScroll1(this.checked)" checked> Smooth Scroll
+                        </label>
+                    </div>
+                </div>
+                <div id="editor1" class="editor-container"></div>
+            </div>
+            
+            <!-- Secondary Editor -->
+            <div class="editor-card">
+                <div class="editor-header">
+                    <h3 class="editor-title">⚡ Secondary Editor - Python</h3>
+                </div>
+                <div class="editor-controls">
+                    <button class="btn" onclick="insertSamplePython()">Insert Sample</button>
+                    <button class="btn" onclick="clearEditor2()">Clear</button>
+                    <button class="btn" onclick="undoEditor2()">Undo</button>
+                    <button class="btn" onclick="redoEditor2()">Redo</button>
+                    <select class="select" onchange="changeLanguage2(this.value)">
+                        <option value="python">Python</option>
+                        <option value="typescript">TypeScript</option>
+                        <option value="thai-typescript">TypeScript (ไทย)</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="json">JSON</option>
+                    </select>
+                    <select class="select" onchange="changeTheme2(this.value)">
+                        <option value="default">Default</option>
+                        <option value="nekodark">Neko Dark</option>
+                        <option value="sunlight">Sunlight</option>
+                        <option value="cutie">Cutie</option>
+                        <option value="extradark">Extra Dark</option>
+                        <option value="moondark">Moon Dark</option>
+                        <option value="nekolight">Neko Light</option>
+                        <option value="vanilla">Vanilla</option>
+                    </select>
+                    <div class="cursor-controls">
+                        <span class="cursor-label">Cursor:</span>
+                        <select class="select" onchange="setCursorAnimation2(this.value)">
+                            <option value="blink">Blink</option>
+                            <option value="fade">Fade</option>
+                            <option value="pulse">Pulse</option>
+                        </select>
+                        <label class="cursor-label">
+                            <input type="checkbox" onchange="toggleSubpixel2(this.checked)" checked> Subpixel
+                        </label>
+                        <label class="cursor-label">
+                            <input type="checkbox" onchange="toggleSmoothScroll2(this.checked)" checked> Smooth Scroll
+                        </label>
+                    </div>
+                </div>
+                <div id="editor2" class="editor-container"></div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2 class="features-title">✨ Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title">🎨 Advanced Syntax Highlighting</h3>
+                    <p class="feature-description">Intelligent syntax highlighting for JavaScript, TypeScript, Python, and JSON with extensible language support and custom themes.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">⌨️ Complete Keyboard Support</h3>
+                    <p class="feature-description">Full keyboard navigation, text selection, and editing with customizable key bindings and shortcuts for maximum productivity.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">🔄 Smart Undo/Redo</h3>
+                    <p class="feature-description">Unlimited undo/redo functionality with intelligent action grouping and complete history management.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">✨ Smooth Animations</h3>
+                    <p class="feature-description">Beautiful cursor animations with fade, blink, and pulse effects for enhanced visual feedback and user experience.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">🔍 Subpixel Text Rendering</h3>
+                    <p class="feature-description">Advanced subpixel text rendering technology that delivers crystal-clear text on all display types, especially high-DPI screens.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">🎯 Precision Cursor</h3>
+                    <p class="feature-description">Advanced cursor positioning with pixel-perfect accuracy, multi-line selection, and intelligent text navigation.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">🎨 Customizable Themes</h3>
+                    <p class="feature-description">Built-in dark and light themes with full customization support for colors, fonts, and styling preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">🚀 High Performance</h3>
+                    <p class="feature-description">Canvas-based rendering engine with subpixel text rendering for crystal-clear text on high-DPI displays, optimized for smooth scrolling and editing.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">🌊 Ultra Smooth Scrolling</h3>
+                    <p class="feature-description">Buttery-smooth scrolling with momentum physics, easing animations, and touch gesture support for a premium editing experience.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">📱 Responsive Design</h3>
+                    <p class="feature-description">Fully responsive interface that works seamlessly across desktop, tablet, and mobile devices with touch support.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { EditorView } from '../../src/gui/EditorView.ts';
+        import { themes, getTheme, getDarkThemes, getLightThemes } from '../../src/gui/themes/index.ts';
+        import { MikoEditorI18n, ContextMenu } from '../../src/i18n/index.ts';
+        
+        // Initialize i18n system
+        const i18nManager = new MikoEditorI18n('en');
+        
+        // Load available locales
+        const loadLocales = async () => {
+            try {
+                await i18nManager.loadLocale('en', './../../locales/en.po');
+                await i18nManager.loadLocale('es', './../../locales/es.po');
+                await i18nManager.loadLocale('fr', './../../locales/fr.po');
+                await i18nManager.loadLocale('th', './../../locales/th.po');
+                console.log('All locales loaded successfully');
+            } catch (error) {
+                console.error('Failed to load locales:', error);
+            }
+        };
+        
+        // Load locales on startup
+        loadLocales();
+        
+        // Enhanced sample code snippets
+        const samples = {
+            typescript: `// Advanced TypeScript Example
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  preferences?: UserPreferences;
+}
+
+interface UserPreferences {
+  theme: 'light' | 'dark';
+  language: string;
+  notifications: boolean;
+}
+
+class UserManager {
+  private users: Map<number, User> = new Map();
+  
+  createUser(data: Partial<User>): User {
+    const user: User = {
+      id: Math.floor(Math.random() * 10000),
+      name: data.name || 'Anonymous',
+      email: data.email || 'user@example.com',
+      preferences: {
+        theme: 'dark',
+        language: 'en',
+        notifications: true,
+        ...data.preferences
+      }
+    };
+    
+    this.users.set(user.id, user);
+    return user;
+  }
+  
+  getUser(id: number): User | undefined {
+    return this.users.get(id);
+  }
+  
+  updatePreferences(id: number, prefs: Partial<UserPreferences>): boolean {
+    const user = this.users.get(id);
+    if (user) {
+      user.preferences = { ...user.preferences, ...prefs };
+      return true;
+    }
+    return false;
+  }
+}
+
+const manager = new UserManager();
+const user = manager.createUser({
+  name: 'John Doe',
+  email: 'john@example.com'
+});
+
+console.log('Created user:', user);`,
+            
+            javascript: `// Modern JavaScript Example
+class AsyncDataProcessor {
+  constructor(apiUrl) {
+    this.apiUrl = apiUrl;
+    this.cache = new Map();
+  }
+  
+  async fetchData(endpoint) {
+    if (this.cache.has(endpoint)) {
+      return this.cache.get(endpoint);
+    }
+    
+    try {
+      const response = await fetch(\`\${this.apiUrl}/\${endpoint}\`);
+      if (!response.ok) {
+        throw new Error(\`HTTP \${response.status}: \${response.statusText}\`);
+      }
+      
+      const data = await response.json();
+      this.cache.set(endpoint, data);
+      return data;
+    } catch (error) {
+      console.error('Fetch error:', error);
+      throw error;
+    }
+  }
+  
+  async processData(endpoint, transformer = (x) => x) {
+    const data = await this.fetchData(endpoint);
+    return Array.isArray(data) 
+      ? data.map(transformer)
+      : transformer(data);
+  }
+  
+  clearCache() {
+    this.cache.clear();
+  }
+}
+
+// Usage with async/await
+const processor = new AsyncDataProcessor('https://api.example.com');
+
+(async () => {
+  try {
+    const users = await processor.processData('users', user => ({
+      ...user,
+      displayName: \`\${user.firstName} \${user.lastName}\`
+    }));
+    
+    console.log('Processed users:', users);
+  } catch (error) {
+    console.error('Processing failed:', error);
+  }
+})();`,
+
+            python: `# Advanced Python Example
+from typing import List, Dict, Optional, Callable, Generic, TypeVar
+from dataclasses import dataclass, field
+from datetime import datetime
+import asyncio
+import json
+
+T = TypeVar('T')
+
+@dataclass
+class ProcessingResult(Generic[T]):
+    data: T
+    timestamp: datetime = field(default_factory=datetime.now)
+    metadata: Dict[str, any] = field(default_factory=dict)
+    
+    def to_dict(self) -> Dict:
+        return {
+            'data': self.data,
+            'timestamp': self.timestamp.isoformat(),
+            'metadata': self.metadata
+        }
+
+class AsyncDataPipeline(Generic[T]):
+    def __init__(self, name: str):
+        self.name = name
+        self.processors: List[Callable[[T], T]] = []
+        self.filters: List[Callable[[T], bool]] = []
+    
+    def add_processor(self, func: Callable[[T], T]) -> 'AsyncDataPipeline[T]':
+        """Add a data transformation function"""
+        self.processors.append(func)
+        return self
+    
+    def add_filter(self, func: Callable[[T], bool]) -> 'AsyncDataPipeline[T]':
+        """Add a data filtering function"""
+        self.filters.append(func)
+        return self
+    
+    async def process_batch(self, items: List[T]) -> List[ProcessingResult[T]]:
+        """Process a batch of items asynchronously"""
+        tasks = [self._process_item(item) for item in items]
+        return await asyncio.gather(*tasks)
+    
+    async def _process_item(self, item: T) -> Optional[ProcessingResult[T]]:
+        """Process a single item through the pipeline"""
+        # Apply filters
+        for filter_func in self.filters:
+            if not filter_func(item):
+                return None
+        
+        # Apply processors
+        processed_item = item
+        for processor in self.processors:
+            processed_item = processor(processed_item)
+            # Simulate async processing
+            await asyncio.sleep(0.001)
+        
+        return ProcessingResult(
+            data=processed_item,
+            metadata={'pipeline': self.name, 'processors': len(self.processors)}
+        )
+
+# Usage example
+async def main():
+    # Create pipeline for number processing
+    pipeline = AsyncDataPipeline[int]("NumberProcessor")
+    pipeline.add_filter(lambda x: x > 0)  # Only positive numbers
+    pipeline.add_processor(lambda x: x ** 2)  # Square the number
+    pipeline.add_processor(lambda x: x + 1)  # Add one
+    
+    numbers = list(range(-5, 11))  # [-5, -4, ..., 9, 10]
+    results = await pipeline.process_batch(numbers)
+    
+    # Filter out None results and display
+    valid_results = [r for r in results if r is not None]
+    
+    print(f"Processed {len(valid_results)} items:")
+    for result in valid_results:
+        print(f"  {result.data} (processed at {result.timestamp.strftime('%H:%M:%S')})")
+
+# Run the async example
+if __name__ == "__main__":
+    asyncio.run(main())`,
+
+            json: `{
+  "name": "mikoeditor",
+  "version": "2.0.0",
+  "description": "A modern, powerful text editor library with advanced features",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write src/**/*.{ts,tsx}",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "text-editor",
+    "typescript",
+    "syntax-highlighting",
+    "canvas-rendering",
+    "code-editor",
+    "dark-theme",
+    "modern-ui",
+    "performance"
+  ],
+  "author": {
+    "name": "MikoEditor Team",
+    "email": "team@mikoeditor.dev",
+    "url": "https://mikoeditor.dev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikoeditor/mikoeditor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mikoeditor/mikoeditor/issues"
+  },
+  "homepage": "https://mikoeditor.dev",
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "highlight.js": "^11.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.0",
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  }
+}`
+        };
+        
+        // Theme management
+        let isDarkTheme = true;
+        
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (isDarkTheme) {
+                body.classList.remove('light-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            } else {
+                body.classList.add('light-theme');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            }
+            
+            // Update editor themes
+            if (window.editor1) {
+                editor1.setTheme(isDarkTheme ? defaultTheme : lightTheme);
+            }
+            if (window.editor2) {
+                editor2.setTheme(isDarkTheme ? defaultTheme : lightTheme);
+            }
+        }
+        
+        // Language management functions
+        function changeUILanguage(locale) {
+            i18nManager.setLocale(locale);
+            console.log(`UI language changed to: ${locale}`);
+            
+            // Update UI elements with new translations
+            updateUITranslations();
+        }
+        
+        function updateUITranslations() {
+            // Update theme toggle text
+            const themeText = document.getElementById('theme-text');
+            const currentTheme = document.body.classList.contains('light-theme') ? 'Light Mode' : 'Dark Mode';
+            // For now, keep English labels - can be enhanced later
+        }
+        
+        // Context menu functionality
+        function createEditorContextMenu() {
+            const contextMenu = new ContextMenu({
+                theme: isDarkTheme ? 'dark' : 'light',
+                showIcons: true,
+                showShortcuts: true
+            });
+            
+            contextMenu.setI18n(i18nManager.getI18n());
+            
+            return contextMenu;
+        }
+        
+        function showContextMenuDemo(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const contextMenu = createEditorContextMenu();
+            const menuItems = [
+                {
+                    id: 'cut',
+                    label: 'Cut',
+                    labelKey: 'cut',
+                    icon: '✂️',
+                    shortcut: 'Ctrl+X',
+                    action: () => console.log('Cut action')
+                },
+                {
+                    id: 'copy',
+                    label: 'Copy',
+                    labelKey: 'copy',
+                    icon: '📋',
+                    shortcut: 'Ctrl+C',
+                    action: () => console.log('Copy action')
+                },
+                {
+                    id: 'paste',
+                    label: 'Paste',
+                    labelKey: 'paste',
+                    icon: '📄',
+                    shortcut: 'Ctrl+V',
+                    action: () => console.log('Paste action')
+                },
+                {
+                    id: 'separator1',
+                    separator: true
+                },
+                {
+                    id: 'select_all',
+                    label: 'Select All',
+                    labelKey: 'select_all',
+                    icon: '🔘',
+                    shortcut: 'Ctrl+A',
+                    action: () => console.log('Select All action')
+                },
+                {
+                    id: 'separator2',
+                    separator: true
+                },
+                {
+                    id: 'language_menu',
+                    label: 'Change Language',
+                    labelKey: 'change_language',
+                    icon: '🌐',
+                    submenu: [
+                        {
+                            id: 'lang_typescript',
+                            label: 'TypeScript',
+                            labelKey: 'typescript',
+                            action: () => {
+                                changeLanguage(editor1, 'typescript');
+                                console.log('Changed to TypeScript');
+                            }
+                        },
+                        {
+                            id: 'lang_thai_typescript',
+                            label: 'TypeScript (ไทย)',
+                            action: () => {
+                                changeLanguage(editor1, 'thai-typescript');
+                                console.log('Changed to Thai TypeScript');
+                            }
+                        },
+                        {
+                            id: 'lang_javascript',
+                            label: 'JavaScript',
+                            labelKey: 'javascript',
+                            action: () => {
+                                changeLanguage(editor1, 'javascript');
+                                console.log('Changed to JavaScript');
+                            }
+                        },
+                        {
+                            id: 'lang_python',
+                            label: 'Python',
+                            labelKey: 'python',
+                            action: () => {
+                                changeLanguage(editor1, 'python');
+                                console.log('Changed to Python');
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'theme_menu',
+                    label: 'Change Theme',
+                    labelKey: 'change_theme',
+                    icon: '🎨',
+                    submenu: [
+                        {
+                            id: 'theme_default',
+                            label: 'Default',
+                            action: () => changeTheme(editor1, 'default')
+                        },
+                        {
+                            id: 'theme_nekodark',
+                            label: 'Neko Dark',
+                            action: () => changeTheme(editor1, 'nekodark')
+                        },
+                        {
+                            id: 'theme_cutie',
+                            label: 'Cutie',
+                            action: () => changeTheme(editor1, 'cutie')
+                        },
+                        {
+                            id: 'theme_sunlight',
+                            label: 'Sunlight',
+                            action: () => changeTheme(editor1, 'sunlight')
+                        }
+                    ]
+                }
+            ];
+            
+            const rect = event.target.getBoundingClientRect();
+            contextMenu.show(menuItems, rect.left, rect.top + rect.height + 5);
+        }
+        
+        // Add right-click context menu to editors
+        function addContextMenuToEditor(editor, container) {
+            container.addEventListener('contextmenu', (event) => {
+                event.preventDefault();
+                showEditorContextMenu(event, editor);
+            });
+        }
+        
+        function showEditorContextMenu(event, editor) {
+            const contextMenu = createEditorContextMenu();
+            const menuItems = [
+                {
+                    id: 'cut',
+                    label: 'Cut',
+                    labelKey: 'cut',
+                    icon: '✂️',
+                    shortcut: 'Ctrl+X',
+                    action: () => {
+                        // Add cut functionality here
+                        console.log('Cut from editor');
+                    }
+                },
+                {
+                    id: 'copy',
+                    label: 'Copy',
+                    labelKey: 'copy',
+                    icon: '📋',
+                    shortcut: 'Ctrl+C',
+                    action: () => {
+                        // Add copy functionality here
+                        console.log('Copy from editor');
+                    }
+                },
+                {
+                    id: 'paste',
+                    label: 'Paste',
+                    labelKey: 'paste',
+                    icon: '📄',
+                    shortcut: 'Ctrl+V',
+                    action: () => {
+                        // Add paste functionality here
+                        console.log('Paste to editor');
+                    }
+                },
+                {
+                    id: 'separator1',
+                    separator: true
+                },
+                {
+                    id: 'undo',
+                    label: 'Undo',
+                    labelKey: 'undo',
+                    icon: '↶',
+                    shortcut: 'Ctrl+Z',
+                    action: () => editor.getEditor().undo()
+                },
+                {
+                    id: 'redo',
+                    label: 'Redo',
+                    labelKey: 'redo',
+                    icon: '↷',
+                    shortcut: 'Ctrl+Y',
+                    action: () => editor.getEditor().redo()
+                }
+            ];
+            
+            contextMenu.show(menuItems, event.clientX, event.clientY);
+        }
+
+        // Make functions available globally
+        window.changeUILanguage = changeUILanguage;
+        window.showContextMenuDemo = showContextMenuDemo;
+        
+        // Initialize editors
+        let editor1, editor2;
+        
+        function initEditors() {
+            // Primary editor (default theme)
+            const container1 = document.getElementById('editor1');
+            editor1 = new EditorView(container1, samples.typescript, getTheme('default'));
+            editor1.setLanguage('typescript');
+            
+            // Secondary editor (default theme)
+            const container2 = document.getElementById('editor2');
+            editor2 = new EditorView(container2, samples.python, getTheme('default'));
+            editor2.setLanguage('python');
+            
+            // Add context menus to editors
+            addContextMenuToEditor(editor1, container1);
+            addContextMenuToEditor(editor2, container2);
+            
+            // Make editors available globally
+            window.editor1 = editor1;
+            window.editor2 = editor2;
+            
+            // Make functions available globally
+            window.insertSampleTS = () => insertSample(editor1, 'typescript');
+            window.insertSamplePython = () => insertSample(editor2, 'python');
+            window.clearEditor1 = () => clearEditor(editor1);
+            window.clearEditor2 = () => clearEditor(editor2);
+            window.undoEditor1 = () => editor1.getEditor().undo();
+            window.redoEditor1 = () => editor1.getEditor().redo();
+            window.undoEditor2 = () => editor2.getEditor().undo();
+            window.redoEditor2 = () => editor2.getEditor().redo();
+            window.changeLanguage1 = (lang) => changeLanguage(editor1, lang);
+            window.changeLanguage2 = (lang) => changeLanguage(editor2, lang);
+            window.changeTheme1 = (themeName) => changeTheme(editor1, themeName);
+            window.changeTheme2 = (themeName) => changeTheme(editor2, themeName);
+            window.setCursorAnimation1 = (type) => setCursorAnimation(editor1, type);
+            window.setCursorAnimation2 = (type) => setCursorAnimation(editor2, type);
+            window.toggleSubpixel1 = toggleSubpixel1;
+            window.toggleSubpixel2 = toggleSubpixel2;
+            window.toggleSmoothScroll1 = toggleSmoothScroll1;
+            window.toggleSmoothScroll2 = toggleSmoothScroll2;
+        }
+        
+        function insertSample(editor, defaultLang) {
+            const currentLang = editor.getLanguage();
+            const sample = samples[currentLang] || samples[defaultLang];
+            editor.getEditor().insertText('\\n\\n' + sample);
+        }
+        
+        function clearEditor(editor) {
+            editor.getEditor().setContent('');
+        }
+        
+        function changeLanguage(editor, lang) {
+            // Handle Thai TypeScript as TypeScript syntax
+            const syntaxLang = lang === 'thai-typescript' ? 'typescript' : lang;
+            editor.setLanguage(syntaxLang);
+            
+            const sample = samples[lang];
+            if (sample) {
+                editor.getEditor().setContent(sample);
+            }
+        }
+        
+        function changeTheme(editor, themeName) {
+            const theme = getTheme(themeName);
+            if (theme) {
+                editor.setTheme(theme);
+            }
+        }
+        
+        function setCursorAnimation(editor, type) {
+            // Set different speeds for different animation types
+            let speed = 530; // default
+            switch(type) {
+                case 'fade':
+                    speed = 800;
+                    break;
+                case 'blink': 
+                    speed = 530;
+                    break;
+                case 'pulse':
+                    speed = 1000;
+                    break;
+            }
+            editor.setCursorAnimation(type, speed);
+        }
+        
+        function toggleSubpixel1(enabled) {
+            if (editor1) {
+                const renderer = editor1.getRenderer();
+                renderer.setSubpixelEnabled(enabled);
+                editor1.refresh();
+                console.log(`Subpixel rendering for Editor 1: ${enabled ? 'enabled' : 'disabled'}`);
+            }
+        }
+        
+        function toggleSubpixel2(enabled) {
+            if (editor2) {
+                const renderer = editor2.getRenderer();
+                renderer.setSubpixelEnabled(enabled);
+                editor2.refresh();
+                console.log(`Subpixel rendering for Editor 2: ${enabled ? 'enabled' : 'disabled'}`);
+            }
+        }
+        
+        function toggleSmoothScroll1(enabled) {
+            if (editor1) {
+                editor1.setSmoothScrolling(enabled);
+                console.log(`Smooth scrolling for Editor 1: ${enabled ? 'enabled' : 'disabled'}`);
+            }
+        }
+        
+        function toggleSmoothScroll2(enabled) {
+            if (editor2) {
+                editor2.setSmoothScrolling(enabled);
+                console.log(`Smooth scrolling for Editor 2: ${enabled ? 'enabled' : 'disabled'}`);
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initEditors);
+    </script>
+</body>
+</html>

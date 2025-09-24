@@ -1,0 +1,161 @@
+# MikoEditor English Translation
+# Copyright (C) 2025 MikoEditor Team
+# This file is distributed under the same license as the MikoEditor package.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: MikoEditor 1.0\\n"
+"Report-Msgid-Bugs-To: support@mikoeditor.com\\n"
+"POT-Creation-Date: 2025-09-24 12:00+0000\\n"
+"PO-Revision-Date: 2025-09-24 12:00+0000\\n"
+"Last-Translator: MikoEditor Team <team@mikoeditor.com>\\n"
+"Language-Team: English <en@mikoeditor.com>\\n"
+"Language: en\\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\\n"
+
+# Editor context menu
+msgid "cut"
+msgstr "Cut"
+
+msgid "copy"
+msgstr "Copy"
+
+msgid "paste"
+msgstr "Paste"
+
+msgid "select_all"
+msgstr "Select All"
+
+msgid "undo"
+msgstr "Undo"
+
+msgid "redo"
+msgstr "Redo"
+
+# File operations
+msgid "new_file"
+msgstr "New File"
+
+msgid "open_file"
+msgstr "Open File..."
+
+msgid "save_file"
+msgstr "Save"
+
+msgid "save_as"
+msgstr "Save As..."
+
+msgid "close_file"
+msgstr "Close"
+
+# Edit operations
+msgid "find"
+msgstr "Find"
+
+msgid "find_replace"
+msgstr "Find and Replace"
+
+msgid "go_to_line"
+msgstr "Go to Line..."
+
+# View operations
+msgid "zoom_in"
+msgstr "Zoom In"
+
+msgid "zoom_out"
+msgstr "Zoom Out"
+
+msgid "zoom_reset"
+msgstr "Reset Zoom"
+
+msgid "toggle_word_wrap"
+msgstr "Toggle Word Wrap"
+
+msgid "toggle_minimap"
+msgstr "Toggle Minimap"
+
+# Language selection
+msgid "set_language"
+msgstr "Set Language"
+
+msgid "auto_detect"
+msgstr "Auto Detect"
+
+# Theme operations
+msgid "set_theme"
+msgstr "Set Theme"
+
+msgid "light_theme"
+msgstr "Light Theme"
+
+msgid "dark_theme"
+msgstr "Dark Theme"
+
+msgid "auto_theme"
+msgstr "Auto Theme"
+
+# Cursor animation
+msgid "cursor_animation"
+msgstr "Cursor Animation"
+
+msgid "cursor_blink"
+msgstr "Blink"
+
+msgid "cursor_fade"
+msgstr "Fade"
+
+msgid "cursor_pulse"
+msgstr "Pulse"
+
+# Common actions
+msgid "ok"
+msgstr "OK"
+
+msgid "cancel"
+msgstr "Cancel"
+
+msgid "apply"
+msgstr "Apply"
+
+msgid "close"
+msgstr "Close"
+
+msgid "yes"
+msgstr "Yes"
+
+msgid "no"
+msgstr "No"
+
+# Status messages
+msgid "file_saved"
+msgstr "File saved successfully"
+
+msgid "file_opened"
+msgstr "File opened"
+
+msgid "no_file_selected"
+msgstr "No file selected"
+
+# Error messages
+msgid "error_opening_file"
+msgstr "Error opening file"
+
+msgid "error_saving_file"
+msgstr "Error saving file"
+
+msgid "file_not_found"
+msgstr "File not found"
+
+# Plurals
+msgid "character_count"
+msgid_plural "character_count_plural"
+msgstr[0] "%d character"
+msgstr[1] "%d characters"
+
+msgid "line_count"
+msgid_plural "line_count_plural"
+msgstr[0] "%d line"
+msgstr[1] "%d lines"

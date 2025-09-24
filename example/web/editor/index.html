@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MikoEditor - Fullscreen Code Editor</title>
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        /* Fullscreen Editor Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-tertiary: #16213e;
+            --bg-toolbar: #16213e;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-accent: #60a5fa;
+            --border-color: #334155;
+            --button-bg: #374151;
+            --button-hover: #4b5563;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .light-theme {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --bg-toolbar: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-accent: #3b82f6;
+            --border-color: #e2e8f0;
+            --button-bg: #f1f5f9;
+            --button-hover: #e2e8f0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-toolbar);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            z-index: 100;
+        }
+
+        .toolbar-left,
+        .toolbar-center,
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .toolbar-center {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            background: var(--button-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: var(--button-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn.active {
+            background: var(--text-accent);
+            color: white;
+        }
+
+        .select {
+            padding: 0.5rem 1rem;
+            background: var(--button-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Main Editor Area */
+        .editor-main {
+            flex: 1;
+            display: flex;
+            height: calc(100vh - 60px);
+            position: relative;
+        }
+
+        .editor-content {
+            flex: 1;
+            height: 100%;
+            border: none;
+            outline: none;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1.5rem;
+            background: var(--bg-toolbar);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .status-left,
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .toolbar {
+                padding: 0.5rem 1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .toolbar-center {
+                order: 3;
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: 0.5rem;
+            }
+
+            .btn {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .select {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .status-bar {
+                padding: 0.375rem 1rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--text-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 1rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<script type="module">
+    import { EditorView } from '../../../src/gui/EditorView.js';
+    import { themes, getTheme, getDarkThemes, getLightThemes } from '../../../src/gui/themes/index.js';
+    import { MikoEditorI18n, ContextMenu } from '../../../src/i18n/index.js';
+
+    // Make imports available globally
+    window.EditorView = EditorView;
+    window.getTheme = getTheme;
+    window.MikoEditorI18n = MikoEditorI18n;
+    window.ContextMenu = ContextMenu;
+</script>
+
+<body>
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <span>Loading MikoEditor...</span>
+    </div>
+
+    <div id="editor-app" class="editor-container fade-in" style="display: none;">
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <div class="logo">🎯 MikoEditor</div>
+                <button class="btn" onclick="newFile()">
+                    <span>📄</span> New
+                </button>
+                <button class="btn" onclick="openFile()">
+                    <span>📂</span> Open
+                </button>
+                <button class="btn" onclick="saveFile()">
+                    <span>💾</span> Save
+                </button>
+            </div>
+
+            <div class="toolbar-center">
+                <select class="select" onchange="changeLanguage(this.value)" id="language-select">
+                    <option value="typescript">TypeScript</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="json">JSON</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="markdown">Markdown</option>
+                </select>
+
+                <select class="select" onchange="changeTheme(this.value)" id="theme-select">
+                    <option value="default">Default</option>
+                    <option value="nekodark">Neko Dark</option>
+                    <option value="sunlight">Sunlight</option>
+                    <option value="cutie">Cutie</option>
+                    <option value="extradark">Extra Dark</option>
+                    <option value="moondark">Moon Dark</option>
+                    <option value="nekolight">Neko Light</option>
+                    <option value="vanilla">Vanilla</option>
+                </select>
+
+                <select class="select" onchange="changeUILanguage(this.value)" id="ui-language-select">
+                    <option value="en">🇺🇸 English</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="th">🇹🇭 ไทย</option>
+                </select>
+            </div>
+
+            <div class="toolbar-right">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="subpixel-checkbox" onchange="toggleSubpixel(this.checked)" checked>
+                    <label for="subpixel-checkbox">Subpixel</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="smooth-scroll-checkbox" onchange="toggleSmoothScroll(this.checked)"
+                        checked>
+                    <label for="smooth-scroll-checkbox">Smooth Scroll</label>
+                </div>
+
+                <select class="select" onchange="setCursorAnimation(this.value)" id="cursor-select">
+                    <option value="fade">Fade Cursor</option>
+                    <option value="blink">Blink Cursor</option>
+                    <option value="pulse">Pulse Cursor</option>
+                </select>
+
+                <button class="btn" onclick="toggleTheme()" id="theme-toggle">
+                    <span id="theme-icon">🌙</span>
+                </button>
+
+                <button class="btn" onclick="toggleFullscreen()">
+                    <span>⛶</span> Fullscreen
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Editor Area -->
+        <div class="editor-main">
+            <div id="editor" class="editor-content"></div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-left">
+                <div class="status-item">
+                    <span>📍</span>
+                    <span id="cursor-position">Line 1, Col 1</span>
+                </div>
+                <div class="status-item">
+                    <span>📝</span>
+                    <span id="file-stats">0 lines, 0 words</span>
+                </div>
+                <div class="status-item">
+                    <span>🔤</span>
+                    <span id="current-language">TypeScript</span>
+                </div>
+            </div>
+
+            <div class="status-right">
+                <div class="status-item">
+                    <span>🎨</span>
+                    <span id="current-theme">Default Theme</span>
+                </div>
+                <div class="status-item">
+                    <span>🌐</span>
+                    <span id="current-ui-language">English</span>
+                </div>
+                <div class="status-item" id="editor-ready">
+                    <span>✅</span>
+                    <span>Ready</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Initialize i18n system
+        const i18nManager = new MikoEditorI18n('en');
+        
+        // Load available locales
+        const loadLocales = async () => {
+            try {
+                await i18nManager.loadLocale('en', './../../../locales/en.po');
+                await i18nManager.loadLocale('es', './../../../locales/es.po');
+                await i18nManager.loadLocale('fr', './../../../locales/fr.po');
+                await i18nManager.loadLocale('th', './../../../locales/th.po');
+                console.log('All locales loaded successfully');
+            } catch (error) {
+                console.error('Failed to load locales:', error);
+            }
+        };
+
+        // Global variables
+        let editor;
+        let isDarkTheme = true;
+        let currentFileName = 'untitled.ts';
+        let isModified = false;
+
+        // Sample code for different languages
+        const sampleCode = {
+            typescript: `// Welcome to MikoEditor - TypeScript Example
+interface User {
+    id: number;
+    name: string;
+    email: string;
+    preferences?: UserPreferences;
+}
+
+interface UserPreferences {
+    theme: 'light' | 'dark';
+    language: string;
+    notifications: boolean;
+}
+
+class UserManager {
+    private users: Map<number, User> = new Map();
+    
+    createUser(data: Partial<User>): User {
+        const user: User = {
+            id: Math.floor(Math.random() * 10000),
+            name: data.name || 'Anonymous',
+            email: data.email || 'user@example.com',
+            preferences: {
+                theme: 'dark',
+                language: 'en',
+                notifications: true,
+                ...data.preferences
+            }
+        };
+        
+        this.users.set(user.id, user);
+        return user;
+    }
+    
+    getUser(id: number): User | undefined {
+        return this.users.get(id);
+    }
+}
+
+const manager = new UserManager();
+const user = manager.createUser({
+    name: 'John Doe',
+    email: 'john@example.com'
+});
+
+console.log('Created user:', user);`,
+
+            javascript: `// Welcome to MikoEditor - JavaScript Example
+class AsyncDataProcessor {
+    constructor(apiUrl) {
+        this.apiUrl = apiUrl;
+        this.cache = new Map();
+    }
+    
+    async fetchData(endpoint) {
+        if (this.cache.has(endpoint)) {
+            return this.cache.get(endpoint);
+        }
+        
+        try {
+            const response = await fetch(\`\${this.apiUrl}/\${endpoint}\`);
+            if (!response.ok) {
+                throw new Error(\`HTTP \${response.status}: \${response.statusText}\`);
+            }
+            
+            const data = await response.json();
+            this.cache.set(endpoint, data);
+            return data;
+        } catch (error) {
+            console.error('Fetch error:', error);
+            throw error;
+        }
+    }
+    
+    async processData(endpoint, transformer = (x) => x) {
+        const data = await this.fetchData(endpoint);
+        return Array.isArray(data) 
+            ? data.map(transformer)
+            : transformer(data);
+    }
+    
+    clearCache() {
+        this.cache.clear();
+    }
+}
+
+// Usage example
+const processor = new AsyncDataProcessor('https://api.example.com');
+console.log('Data processor initialized');`,
+
+            python: `# Welcome to MikoEditor - Python Example
+from typing import List, Dict, Optional, Callable, Generic, TypeVar
+from dataclasses import dataclass, field
+from datetime import datetime
+import asyncio
+
+T = TypeVar('T')
+
+@dataclass
+class ProcessingResult(Generic[T]):
+    data: T
+    timestamp: datetime = field(default_factory=datetime.now)
+    metadata: Dict[str, any] = field(default_factory=dict)
+    
+    def to_dict(self) -> Dict:
+        return {
+            'data': self.data,
+            'timestamp': self.timestamp.isoformat(),
+            'metadata': self.metadata
+        }
+
+class AsyncDataPipeline(Generic[T]):
+    def __init__(self, name: str):
+        self.name = name
+        self.processors: List[Callable[[T], T]] = []
+        self.filters: List[Callable[[T], bool]] = []
+    
+    def add_processor(self, func: Callable[[T], T]) -> 'AsyncDataPipeline[T]':
+        """Add a data transformation function"""
+        self.processors.append(func)
+        return self
+    
+    def add_filter(self, func: Callable[[T], bool]) -> 'AsyncDataPipeline[T]':
+        """Add a data filtering function"""
+        self.filters.append(func)
+        return self
+    
+    async def process_batch(self, items: List[T]) -> List[ProcessingResult[T]]:
+        """Process a batch of items asynchronously"""
+        tasks = [self._process_item(item) for item in items]
+        return await asyncio.gather(*tasks)
+
+# Usage example
+pipeline = AsyncDataPipeline[int]("NumberProcessor")
+print("Data pipeline created")`,
+
+            json: `{
+  "name": "mikoeditor-fullscreen",
+  "version": "2.0.0",
+  "description": "MikoEditor Fullscreen Code Editor",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "code-editor",
+    "typescript",
+    "fullscreen",
+    "syntax-highlighting"
+  ],
+  "author": "MikoEditor Team",
+  "license": "MIT",
+  "dependencies": {
+    "highlight.js": "^11.9.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "vite": "^5.0.0"
+  }
+}`,
+
+            html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to MikoEditor</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 { color: #667eea; }
+        .feature { 
+            margin: 1rem 0; 
+            padding: 1rem;
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Welcome to MikoEditor!</h1>
+        <p>A modern, powerful code editor built with TypeScript</p>
+        
+        <div class="feature">
+            <h3>✨ Advanced Features</h3>
+            <ul>
+                <li>Syntax highlighting for multiple languages</li>
+                <li>Smooth cursor animations</li>
+                <li>Subpixel text rendering</li>
+                <li>Ultra smooth scrolling</li>
+                <li>Multi-language support (i18n)</li>
+                <li>Context menus</li>
+                <li>Customizable themes</li>
+            </ul>
+        </div>
+        
+        <div class="feature">
+            <h3>🚀 Getting Started</h3>
+            <p>Select a language from the dropdown and start coding!</p>
+        </div>
+    </div>
+</body>
+</html>`,
+
+            css: `/* Welcome to MikoEditor - CSS Example */
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --border-radius: 15px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    background: var(--gradient);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 800px;
+    background: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.feature:hover {
+    transform: translateX(5px);
+}`,
+
+            markdown: `# 🎯 Welcome to MikoEditor
+
+A modern, powerful code editor built with **TypeScript** and featuring advanced capabilities.
+
+## ✨ Key Features
+
+### 🎨 Advanced Syntax Highlighting
+- Support for multiple programming languages
+- Intelligent tokenization and parsing
+- Customizable color schemes and themes
+
+### 🖱️ Smooth User Experience  
+- **Subpixel text rendering** for crystal-clear text on high-DPI displays
+- **Ultra smooth scrolling** with momentum physics and easing
+- **Beautiful cursor animations** (fade, blink, pulse effects)
+
+### 🌍 Internationalization (i18n)
+- Multi-language UI support
+- Currently supports: English, Spanish, French, Thai
+- Context-aware translations with plural forms
+- **PO file format** without external dependencies
+
+### 🎯 Advanced Editor Features
+- Unlimited undo/redo functionality
+- Smart text selection and navigation  
+- Context menus with keyboard shortcuts
+- Real-time cursor position tracking
+- File statistics and language detection
+
+### 🎨 Customizable Themes
+Available themes include:
+- **Default** - Clean and professional
+- **Neko Dark** - Dark theme with warm colors
+- **Sunlight** - Bright and energetic
+- **Cutie** - Playful and colorful
+- **Extra Dark** - Minimal dark theme
+- **Moon Dark** - Cool dark theme
+- **Neko Light** - Light version of Neko
+- **Vanilla** - Classic light theme
+
+## 🚀 Getting Started
+
+1. Select your preferred language from the dropdown
+2. Choose a theme that suits your style
+3. Enable/disable features like subpixel rendering and smooth scrolling
+4. Start coding with the best editing experience!
+
+## 💻 Supported Languages
+
+- TypeScript
+- JavaScript  
+- Python
+- JSON
+- HTML
+- CSS
+- Markdown
+
+---
+
+*Built with ❤️ by the MikoEditor team*`
+        };
+
+        // Initialize editor
+        async function initializeEditor() {
+            try {
+                // Load i18n locales
+                await loadLocales();
+                
+                // Hide loading screen
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('editor-app').style.display = 'flex';
+
+                // Create editor instance
+                const editorContainer = document.getElementById('editor');
+                editor = new EditorView(editorContainer, sampleCode.typescript, getTheme('default'));
+                editor.setLanguage('typescript');
+                
+                // Setup event listeners
+                setupEventListeners();
+                
+                // Update status bar
+                updateStatusBar();
+                
+                // Enable keyboard shortcuts
+                setupKeyboardShortcuts();
+                
+                // Add context menu to editor
+                setupContextMenu();
+                
+                console.log('MikoEditor initialized successfully');
+                
+            } catch (error) {
+                console.error('Failed to initialize editor:', error);
+                document.getElementById('loading').innerHTML = `
+                    <div style="color: #ef4444;">
+                        <span>❌</span>
+                        <span>Failed to load MikoEditor: ${error.message}</span>
+                    </div>
+                `;
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Editor change listener
+            editor.getEditor().addListener({
+                onEditorChange: () => {
+                    isModified = true;
+                    updateStatusBar();
+                    updateWindowTitle();
+                }
+            });
+
+            // Resize listener
+            window.addEventListener('resize', () => {
+                if (editor) {
+                    editor.resize();
+                }
+            });
+        }
+
+        // File operations
+        function newFile() {
+            if (isModified && !confirm('You have unsaved changes. Are you sure you want to create a new file?')) {
+                return;
+            }
+            
+            const language = document.getElementById('language-select').value;
+            editor.getEditor().setContent(sampleCode[language] || '');
+            currentFileName = `untitled.${getFileExtension(language)}`;
+            isModified = false;
+            updateStatusBar();
+            updateWindowTitle();
+        }
+
+        function openFile() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.ts,.js,.py,.json,.html,.css,.md,.txt';
+            
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    editor.getEditor().setContent(e.target.result);
+                    currentFileName = file.name;
+                    isModified = false;
+                    
+                    // Auto-detect language from file extension
+                    const extension = file.name.split('.').pop().toLowerCase();
+                    const languageMap = {
+                        'ts': 'typescript',
+                        'js': 'javascript',
+                        'py': 'python',
+                        'json': 'json',
+                        'html': 'html',
+                        'css': 'css',
+                        'md': 'markdown'
+                    };
+                    
+                    const detectedLanguage = languageMap[extension];
+                    if (detectedLanguage) {
+                        editor.setLanguage(detectedLanguage);
+                        document.getElementById('language-select').value = detectedLanguage;
+                        updateStatusBar();
+                    }
+                    
+                    updateWindowTitle();
+                };
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+
+        function saveFile() {
+            const content = editor.getEditor().getContent();
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = currentFileName;
+            a.click();
+            
+            URL.revokeObjectURL(url);
+            isModified = false;
+            updateStatusBar();
+            updateWindowTitle();
+        }
+
+        // UI functions
+        function changeLanguage(language) {
+            editor.setLanguage(language);
+            document.getElementById('current-language').textContent = language.charAt(0).toUpperCase() + language.slice(1);
+            updateStatusBar();
+        }
+
+        function changeTheme(themeName) {
+            const theme = getTheme(themeName);
+            if (theme) {
+                editor.setTheme(theme);
+                document.getElementById('current-theme').textContent = themeName.charAt(0).toUpperCase() + themeName.slice(1) + ' Theme';
+            }
+        }
+
+        function changeUILanguage(locale) {
+            i18nManager.setLocale(locale);
+            const languageNames = {
+                'en': 'English',
+                'es': 'Español', 
+                'fr': 'Français',
+                'th': 'ไทย'
+            };
+            document.getElementById('current-ui-language').textContent = languageNames[locale] || 'English';
+            console.log(`UI language changed to: ${locale}`);
+        }
+
+        function toggleSubpixel(enabled) {
+            const renderer = editor.getRenderer();
+            renderer.setSubpixelEnabled(enabled);
+            editor.refresh();
+            console.log(`Subpixel rendering: ${enabled ? 'enabled' : 'disabled'}`);
+        }
+
+        function toggleSmoothScroll(enabled) {
+            editor.setSmoothScrolling(enabled);
+            console.log(`Smooth scrolling: ${enabled ? 'enabled' : 'disabled'}`);
+        }
+
+        function setCursorAnimation(type) {
+            let speed = 530;
+            switch(type) {
+                case 'fade': speed = 800; break;
+                case 'blink': speed = 530; break;
+                case 'pulse': speed = 1000; break;
+            }
+            editor.setCursorAnimation(type, speed);
+        }
+
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (isDarkTheme) {
+                body.classList.remove('light-theme');
+                themeIcon.textContent = '🌙';
+            } else {
+                body.classList.add('light-theme');
+                themeIcon.textContent = '☀️';
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Utility functions
+        function getFileExtension(language) {
+            const extensions = {
+                'typescript': 'ts',
+                'javascript': 'js',
+                'python': 'py',
+                'json': 'json',
+                'html': 'html',
+                'css': 'css',
+                'markdown': 'md'
+            };
+            return extensions[language] || 'txt';
+        }
+
+        function updateStatusBar() {
+            if (!editor) return;
+            
+            const cursor = editor.getEditor().getCursor();
+            const position = cursor.getPosition();
+            const content = editor.getEditor().getContent();
+            
+            // Update cursor position
+            document.getElementById('cursor-position').textContent = 
+                `Line ${position.line + 1}, Col ${position.column + 1}`;
+            
+            // Update file stats
+            const lines = content.split('\n').length;
+            const words = content.split(/\s+/).filter(word => word.length > 0).length;
+            const chars = content.length;
+            
+            document.getElementById('file-stats').textContent = 
+                `${lines} lines, ${words} words, ${chars} chars`;
+        }
+
+        function updateWindowTitle() {
+            const modified = isModified ? '• ' : '';
+            document.title = `${modified}${currentFileName} - MikoEditor`;
+        }
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 'n':
+                            e.preventDefault();
+                            newFile();
+                            break;
+                        case 'o':
+                            e.preventDefault();
+                            openFile();
+                            break;
+                        case 's':
+                            e.preventDefault();
+                            saveFile();
+                            break;
+                        case 'f':
+                            e.preventDefault();
+                            // Future: implement find functionality
+                            break;
+                    }
+                }
+                
+                if (e.key === 'F11') {
+                    e.preventDefault();
+                    toggleFullscreen();
+                }
+            });
+        }
+
+        function setupContextMenu() {
+            const editorContainer = document.getElementById('editor');
+            editorContainer.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                showEditorContextMenu(e);
+            });
+        }
+
+        function showEditorContextMenu(event) {
+            const contextMenu = new ContextMenu({
+                theme: isDarkTheme ? 'dark' : 'light',
+                showIcons: true,
+                showShortcuts: true
+            });
+            
+            contextMenu.setI18n(i18nManager.getI18n());
+            
+            const menuItems = [
+                {
+                    id: 'cut',
+                    label: 'Cut',
+                    labelKey: 'cut',
+                    icon: '✂️',
+                    shortcut: 'Ctrl+X',
+                    action: () => console.log('Cut action')
+                },
+                {
+                    id: 'copy',
+                    label: 'Copy',
+                    labelKey: 'copy',
+                    icon: '📋',
+                    shortcut: 'Ctrl+C',
+                    action: () => console.log('Copy action')
+                },
+                {
+                    id: 'paste',
+                    label: 'Paste',
+                    labelKey: 'paste',
+                    icon: '📄',
+                    shortcut: 'Ctrl+V',
+                    action: () => console.log('Paste action')
+                },
+                {
+                    id: 'separator1',
+                    separator: true
+                },
+                {
+                    id: 'select_all',
+                    label: 'Select All',
+                    labelKey: 'select_all',
+                    icon: '🔘',
+                    shortcut: 'Ctrl+A',
+                    action: () => console.log('Select All action')
+                },
+                {
+                    id: 'separator2',
+                    separator: true
+                },
+                {
+                    id: 'undo',
+                    label: 'Undo',
+                    labelKey: 'undo',
+                    icon: '↶',
+                    shortcut: 'Ctrl+Z',
+                    action: () => editor.getEditor().undo()
+                },
+                {
+                    id: 'redo',
+                    label: 'Redo',
+                    labelKey: 'redo',
+                    icon: '↷',
+                    shortcut: 'Ctrl+Y',
+                    action: () => editor.getEditor().redo()
+                }
+            ];
+            
+            contextMenu.show(menuItems, event.clientX, event.clientY);
+        }
+
+        // Make functions globally available
+        window.newFile = newFile;
+        window.openFile = openFile;
+        window.saveFile = saveFile;
+        window.changeLanguage = changeLanguage;
+        window.changeTheme = changeTheme;
+        window.changeUILanguage = changeUILanguage;
+        window.toggleSubpixel = toggleSubpixel;
+        window.toggleSmoothScroll = toggleSmoothScroll;
+        window.setCursorAnimation = setCursorAnimation;
+        window.toggleTheme = toggleTheme;
+        window.toggleFullscreen = toggleFullscreen;
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeEditor);
+    </script>
+
+</body>
+</html>

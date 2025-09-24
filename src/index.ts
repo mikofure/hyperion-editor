@@ -5,4 +5,6 @@ export * from './gui/index.js';
 // Re-export commonly used classes for convenience
 export { Editor } from './core/Editor.js';
 export { EditorView } from './gui/EditorView.js';
-export { defaultTheme, lightTheme } from './gui/TextRenderer.js';
+
+// Re-export theme system
+export * from './gui/themes/index.js';

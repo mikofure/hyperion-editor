@@ -1,0 +1,161 @@
+# MikoEditor Spanish Translation
+# Copyright (C) 2025 MikoEditor Team
+# This file is distributed under the same license as the MikoEditor package.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: MikoEditor 1.0\\n"
+"Report-Msgid-Bugs-To: support@mikoeditor.com\\n"
+"POT-Creation-Date: 2025-09-24 12:00+0000\\n"
+"PO-Revision-Date: 2025-09-24 12:00+0000\\n"
+"Last-Translator: MikoEditor Team <team@mikoeditor.com>\\n"
+"Language-Team: Spanish <es@mikoeditor.com>\\n"
+"Language: es\\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\\n"
+
+# Editor context menu
+msgid "cut"
+msgstr "Cortar"
+
+msgid "copy"
+msgstr "Copiar"
+
+msgid "paste"
+msgstr "Pegar"
+
+msgid "select_all"
+msgstr "Seleccionar Todo"
+
+msgid "undo"
+msgstr "Deshacer"
+
+msgid "redo"
+msgstr "Rehacer"
+
+# File operations
+msgid "new_file"
+msgstr "Nuevo Archivo"
+
+msgid "open_file"
+msgstr "Abrir Archivo..."
+
+msgid "save_file"
+msgstr "Guardar"
+
+msgid "save_as"
+msgstr "Guardar Como..."
+
+msgid "close_file"
+msgstr "Cerrar"
+
+# Edit operations
+msgid "find"
+msgstr "Buscar"
+
+msgid "find_replace"
+msgstr "Buscar y Reemplazar"
+
+msgid "go_to_line"
+msgstr "Ir a la Línea..."
+
+# View operations
+msgid "zoom_in"
+msgstr "Acercar"
+
+msgid "zoom_out"
+msgstr "Alejar"
+
+msgid "zoom_reset"
+msgstr "Restablecer Zoom"
+
+msgid "toggle_word_wrap"
+msgstr "Alternar Ajuste de Línea"
+
+msgid "toggle_minimap"
+msgstr "Alternar Minimapa"
+
+# Language selection
+msgid "set_language"
+msgstr "Establecer Idioma"
+
+msgid "auto_detect"
+msgstr "Detectar Automáticamente"
+
+# Theme operations
+msgid "set_theme"
+msgstr "Establecer Tema"
+
+msgid "light_theme"
+msgstr "Tema Claro"
+
+msgid "dark_theme"
+msgstr "Tema Oscuro"
+
+msgid "auto_theme"
+msgstr "Tema Automático"
+
+# Cursor animation
+msgid "cursor_animation"
+msgstr "Animación del Cursor"
+
+msgid "cursor_blink"
+msgstr "Parpadeo"
+
+msgid "cursor_fade"
+msgstr "Desvanecer"
+
+msgid "cursor_pulse"
+msgstr "Pulso"
+
+# Common actions
+msgid "ok"
+msgstr "Aceptar"
+
+msgid "cancel"
+msgstr "Cancelar"
+
+msgid "apply"
+msgstr "Aplicar"
+
+msgid "close"
+msgstr "Cerrar"
+
+msgid "yes"
+msgstr "Sí"
+
+msgid "no"
+msgstr "No"
+
+# Status messages
+msgid "file_saved"
+msgstr "Archivo guardado exitosamente"
+
+msgid "file_opened"
+msgstr "Archivo abierto"
+
+msgid "no_file_selected"
+msgstr "Ningún archivo seleccionado"
+
+# Error messages
+msgid "error_opening_file"
+msgstr "Error al abrir el archivo"
+
+msgid "error_saving_file"
+msgstr "Error al guardar el archivo"
+
+msgid "file_not_found"
+msgstr "Archivo no encontrado"
+
+# Plurals
+msgid "character_count"
+msgid_plural "character_count_plural"
+msgstr[0] "%d carácter"
+msgstr[1] "%d caracteres"
+
+msgid "line_count"
+msgid_plural "line_count_plural"
+msgstr[0] "%d línea"
+msgstr[1] "%d líneas"

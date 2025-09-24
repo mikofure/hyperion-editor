@@ -171,7 +171,8 @@ export class Editor implements CursorListener {
   moveCursorLeft(): void {
     const position = this.cursor.getPosition();
     if (position.column > 0) {
-      this.cursor.move(0, -1);
+      const currentLineLength = this.document.getLine(position.line).length;
+      this.cursor.move(0, -1, this.document.getLineCount() - 1, currentLineLength);
     } else if (position.line > 0) {
       const prevLineLength = this.document.getLine(position.line - 1).length;
       this.cursor.setPosition({ line: position.line - 1, column: prevLineLength });
@@ -186,7 +187,7 @@ export class Editor implements CursorListener {
     const currentLineLength = this.document.getLine(position.line).length;
     
     if (position.column < currentLineLength) {
-      this.cursor.move(0, 1);
+      this.cursor.move(0, 1, this.document.getLineCount() - 1, currentLineLength);
     } else if (position.line < this.document.getLineCount() - 1) {
       this.cursor.setPosition({ line: position.line + 1, column: 0 });
     }

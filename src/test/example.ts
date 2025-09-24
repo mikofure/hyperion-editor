@@ -1,4 +1,4 @@
-import { EditorView, defaultTheme, lightTheme } from '../index.js';
+import { EditorView, defaultTheme} from '../index.js';
 
 /**
  * Simple example demonstrating how to use the MikoEditor library
@@ -42,7 +42,7 @@ message = greet("World")
 print(message)
 `;
 
-  const editor = new EditorView(container, content, lightTheme);
+  const editor = new EditorView(container, content);
   editor.setLanguage('python');
   
   return editor;
