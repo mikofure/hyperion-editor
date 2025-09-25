@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file UniqueString.cxx
+/** @file UniqueString.cpp
  ** Define an allocator for UniqueString.
  **/
 // Copyright 2017 by Neil Hodgson <neilh@Hyperion.org>

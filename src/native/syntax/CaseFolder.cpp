@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file CaseFolder.cxx
+/** @file CaseFolder.cpp
  ** Classes for case folding.
  **/
 // Copyright 1998-2013 by Neil Hodgson <neilh@Hyperion.org>

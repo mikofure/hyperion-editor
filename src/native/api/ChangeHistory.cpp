@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file ChangeHistory.cxx
+/** @file ChangeHistory.cpp
  ** Manages a history of changes in a document.
  **/
 // Copyright 2022 by Neil Hodgson <neilh@Hyperion.org>

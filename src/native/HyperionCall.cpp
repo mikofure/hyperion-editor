@@ -1,5 +1,5 @@
 // SciTE - Hyperion based Text Editor
-/** @file HyperionCall.cxx
+/** @file HyperionCall.cpp
  ** Interface to calling a Hyperion instance.
  **/
 // Copyright 1998-2019 by Neil Hodgson <neilh@Hyperion.org>

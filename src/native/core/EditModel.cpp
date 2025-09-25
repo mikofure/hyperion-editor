@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file EditModel.cxx
+/** @file EditModel.cpp
  ** Defines the editor state that must be visible to EditorView.
  **/
 // Copyright 1998-2014 by Neil Hodgson <neilh@Hyperion.org>

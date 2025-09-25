@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file Geometry.cxx
+/** @file Geometry.cpp
  ** Helper functions for geometric calculations.
  **/
 // Copyright 2020 by Neil Hodgson <neilh@Hyperion.org>

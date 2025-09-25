@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file ContractionState.cxx
+/** @file ContractionState.cpp
  ** Manages visibility of lines for folding and wrapping.
  **/
 // Copyright 1998-2007 by Neil Hodgson <neilh@Hyperion.org>

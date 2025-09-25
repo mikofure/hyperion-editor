@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file ViewStyle.cxx
+/** @file ViewStyle.cpp
  ** Store information on how the document is to be viewed.
  **/
 // Copyright 1998-2003 by Neil Hodgson <neilh@Hyperion.org>

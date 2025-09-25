@@ -1,7 +1,7 @@
 // Hyperion source code edit control
 /** @file Platform.h
  ** Interface to platform facilities. Also includes some basic utilities.
- ** Implemented in PlatGTK.cxx for GTK+/Linux, PlatWin.cxx for Windows, and PlatWX.cxx for wxWindows.
+ ** Implemented in PlatGTK.cpp for GTK+/Linux, PlatWin.cpp for Windows, and PlatWX.cpp for wxWindows.
  **/
 // Copyright 1998-2009 by Neil Hodgson <neilh@Hyperion.org>
 // The License.txt file describes the conditions under which this software may be distributed.

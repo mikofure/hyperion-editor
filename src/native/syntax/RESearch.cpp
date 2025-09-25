@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file RESearch.cxx
+/** @file RESearch.cpp
  ** Regular expression search library.
  **/
 

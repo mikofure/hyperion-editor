@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file AutoComplete.cxx
+/** @file AutoComplete.cpp
  ** Defines the auto completion list box.
  **/
 // Copyright 1998-2003 by Neil Hodgson <neilh@Hyperion.org>

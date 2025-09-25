@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file Editor.cxx
+/** @file Editor.cpp
  ** Main code for the edit control.
  **/
 // Copyright 1998-2011 by Neil Hodgson <neilh@Hyperion.org>

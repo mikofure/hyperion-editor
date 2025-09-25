@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file XPM.cxx
+/** @file XPM.cpp
  ** Define a class that holds data in the X Pixmap (XPM) format.
  **/
 // Copyright 1998-2003 by Neil Hodgson <neilh@Hyperion.org>

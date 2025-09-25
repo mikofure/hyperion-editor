@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file PositionCache.cxx
+/** @file PositionCache.cpp
  ** Classes for caching layout information.
  **/
 // Copyright 1998-2007 by Neil Hodgson <neilh@Hyperion.org>

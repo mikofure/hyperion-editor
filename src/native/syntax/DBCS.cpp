@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file DBCS.cxx
+/** @file DBCS.cpp
  ** Functions to handle DBCS double byte encodings like Shift-JIS.
  **/
 // Copyright 2017 by Neil Hodgson <neilh@Hyperion.org>

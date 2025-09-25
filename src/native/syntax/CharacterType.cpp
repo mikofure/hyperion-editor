@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file CharacterType.cxx
+/** @file CharacterType.cpp
  ** Tests for character type and case-insensitive comparisons.
  **/
 // Copyright 1998-2010 by Neil Hodgson <neilh@Hyperion.org>

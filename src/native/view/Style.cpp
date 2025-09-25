@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file Style.cxx
+/** @file Style.cpp
  ** Defines the font and colour style for a class of text.
  **/
 // Copyright 1998-2001 by Neil Hodgson <neilh@Hyperion.org>

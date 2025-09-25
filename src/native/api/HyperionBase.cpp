@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file HyperionBase.cxx
+/** @file HyperionBase.cpp
  ** An enhanced subclass of Editor with calltips, autocomplete and context menu.
  **/
 // Copyright 1998-2003 by Neil Hodgson <neilh@Hyperion.org>

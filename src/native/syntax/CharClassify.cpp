@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file CharClassify.cxx
+/** @file CharClassify.cpp
  ** Character classifications used by Document and RESearch.
  **/
 // Copyright 2006 by Neil Hodgson <neilh@Hyperion.org>

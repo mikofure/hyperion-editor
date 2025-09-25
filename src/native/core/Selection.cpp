@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file Selection.cxx
+/** @file Selection.cpp
  ** Classes maintaining the selection.
  **/
 // Copyright 2009 by Neil Hodgson <neilh@Hyperion.org>

@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file UniConversion.cxx
+/** @file UniConversion.cpp
  ** Functions to handle UTF-8 and UTF-16 strings.
  **/
 // Copyright 1998-2001 by Neil Hodgson <neilh@Hyperion.org>

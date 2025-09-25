@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file CellBuffer.cxx
+/** @file CellBuffer.cpp
  ** Manages a buffer of cells.
  **/
 // Copyright 1998-2001 by Neil Hodgson <neilh@Hyperion.org>

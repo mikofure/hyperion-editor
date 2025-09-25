@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file Document.cxx
+/** @file Document.cpp
  ** Text document that handles notifications, DBCS, styling, words and end of line.
  **/
 // Copyright 1998-2011 by Neil Hodgson <neilh@Hyperion.org>

@@ -1,8 +1,9 @@
 // Hyperion source code edit control
-/** @file Indicator.cxx
+/** @file Indicator.cpp
  ** Defines the style of indicators which are text decorations such as underlining.
  **/
 // Copyright 1998-2001 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstdint>
@@ -16,14 +17,13 @@
 #include <algorithm>
 #include <memory>
 
-#include "HyperionTypes.hpp"
-
-#include "platform/Debugging.hpp"
-#include "platform/Geometry.hpp"
-#include "platform/Platform.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Geometry.hpp"
+#include "../platform/Platform.hpp"
+#include "../platform/XPM.hpp"
 
 #include "Indicator.hpp"
-#include "platform/XPM.hpp"
 
 using namespace Hyperion;
 using namespace Hyperion::Internal;

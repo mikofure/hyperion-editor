@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file LineMarker.cxx
+/** @file LineMarker.cpp
  ** Defines the look of a line marker in the margin.
  **/
 // Copyright 1998-2011 by Neil Hodgson <neilh@Hyperion.org>

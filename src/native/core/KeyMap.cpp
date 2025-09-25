@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file KeyMap.cxx
+/** @file KeyMap.cpp
  ** Defines a mapping between keystrokes and commands.
  **/
 // Copyright 1998-2003 by Neil Hodgson <neilh@Hyperion.org>

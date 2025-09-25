@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file PerLine.cxx
+/** @file PerLine.cpp
  ** Manages data associated with each line of the document
  **/
 // Copyright 1998-2009 by Neil Hodgson <neilh@Hyperion.org>

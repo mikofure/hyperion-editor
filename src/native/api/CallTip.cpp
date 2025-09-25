@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file CallTip.cxx
+/** @file CallTip.cpp
  ** Code for displaying call tips.
  **/
 // Copyright 1998-2001 by Neil Hodgson <neilh@Hyperion.org>

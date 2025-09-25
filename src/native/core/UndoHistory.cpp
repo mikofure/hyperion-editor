@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file UndoHistory.cxx
+/** @file UndoHistory.cpp
  ** Manages undo for the document.
  **/
 // Copyright 1998-2024 by Neil Hodgson <neilh@Hyperion.org>

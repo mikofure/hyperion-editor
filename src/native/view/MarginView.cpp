@@ -1,5 +1,5 @@
 // Hyperion source code edit control
-/** @file MarginView.cxx
+/** @file MarginView.cpp
  ** Defines the appearance of the editor margin.
  **/
 // Copyright 1998-2014 by Neil Hodgson <neilh@Hyperion.org>
