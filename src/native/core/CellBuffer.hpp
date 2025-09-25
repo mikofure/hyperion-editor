@@ -2,7 +2,7 @@
 /** @file CellBuffer.h
  ** Manages the text of the document.
  **/
-// Copyright 1998-2004 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2004 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef CELLBUFFER_HPP

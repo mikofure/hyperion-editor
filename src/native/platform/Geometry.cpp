@@ -2,7 +2,7 @@
 /** @file Geometry.cpp
  ** Helper functions for geometric calculations.
  **/
-// Copyright 2020 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2020 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstdint>

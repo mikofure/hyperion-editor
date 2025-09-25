@@ -4,11 +4,12 @@
  * Only needed by GTK+ code but is harmless on other platforms.
  * This comment is not a doc-comment as that causes warnings from g-ir-scanner.
  */
-/* Copyright 1998-2001 by Neil Hodgson <neilh@Hyperion.org>
+/* Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
  * The License.txt file describes the conditions under which this software may be distributed. */
 
-#ifndef HyperionWIDGET_HPP
-#define HyperionWIDGET_HPP
+#ifndef HYPERIONWIDGET_HPP
+#define HYPERIONWIDGET_HPP
 
 #if defined(GTK)
 
@@ -16,16 +17,16 @@
 extern "C" {
 #endif
 
-#define Hyperion(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, Hyperion_get_type (), HyperionObject)
-#define Hyperion_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, Hyperion_get_type (), HyperionClass)
+#define HYPERION(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, Hyperion_get_type (), HyperionObject)
+#define HYPERION_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, Hyperion_get_type (), HyperionClass)
 #define IS_Hyperion(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, Hyperion_get_type ())
 
-#define Hyperion_TYPE_OBJECT             (Hyperion_object_get_type())
-#define Hyperion_OBJECT(obj)             (G_TYPE_CHECK_INSTANCE_CAST((obj), Hyperion_TYPE_OBJECT, HyperionObject))
-#define Hyperion_IS_OBJECT(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), Hyperion_TYPE_OBJECT))
-#define Hyperion_OBJECT_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass), Hyperion_TYPE_OBJECT, HyperionObjectClass))
-#define Hyperion_IS_OBJECT_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE((klass), Hyperion_TYPE_OBJECT))
-#define Hyperion_OBJECT_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS((obj), Hyperion_TYPE_OBJECT, HyperionObjectClass))
+#define HYPERION_TYPE_OBJECT             (Hyperion_object_get_type())
+#define HYPERION_OBJECT(obj)             (G_TYPE_CHECK_INSTANCE_CAST((obj), Hyperion_TYPE_OBJECT, HyperionObject))
+#define HYPERION_IS_OBJECT(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), Hyperion_TYPE_OBJECT))
+#define HYPERION_OBJECT_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass), Hyperion_TYPE_OBJECT, HyperionObjectClass))
+#define HYPERION_IS_OBJECT_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE((klass), Hyperion_TYPE_OBJECT))
+#define HYPERION_OBJECT_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS((obj), Hyperion_TYPE_OBJECT, HyperionObjectClass))
 
 typedef struct _HyperionObject HyperionObject;
 typedef struct _HyperionClass  HyperionObjectClass;
@@ -48,7 +49,7 @@ gintptr		Hyperion_object_send_message	(HyperionObject *sci, unsigned int iMessag
 
 
 GType		scnotification_get_type			(void);
-#define Hyperion_TYPE_NOTIFICATION        (scnotification_get_type())
+#define HYPERION_TYPE_NOTIFICATION        (scnotification_get_type())
 
 #ifndef G_IR_SCANNING
 /* The legacy names confuse the g-ir-scanner program */
@@ -61,7 +62,7 @@ sptr_t		Hyperion_send_message	(HyperionObject *sci,unsigned int iMessage, uptr_t
 void		Hyperion_release_resources(void);
 #endif
 
-#define Hyperion_NOTIFY "sci-notify"
+#define HYPERION_NOTIFY "sci-notify"
 
 #ifdef __cplusplus
 }

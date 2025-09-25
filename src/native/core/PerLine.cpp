@@ -2,7 +2,8 @@
 /** @file PerLine.cpp
  ** Manages data associated with each line of the document
  **/
-// Copyright 1998-2009 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2009 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -18,13 +19,12 @@
 #include <algorithm>
 #include <memory>
 
-#include "HyperionTypes.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Geometry.hpp"
+#include "../platform/Platform.hpp"
+#include "../platform/Position.hpp"
 
-#include "platform/Debugging.hpp"
-#include "platform/Geometry.hpp"
-#include "platform/Platform.hpp"
-
-#include "platform/Position.hpp"
 #include "SplitVector.hpp"
 #include "Partitioning.hpp"
 #include "CellBuffer.hpp"

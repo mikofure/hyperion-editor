@@ -2,7 +2,7 @@
 /** @file ChangeHistory.cpp
  ** Manages a history of changes in a document.
  **/
-// Copyright 2022 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2022 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -16,15 +16,14 @@
 #include <algorithm>
 #include <memory>
 
-#include "HyperionTypes.hpp"
-
+#include "../include/HyperionTypes.hpp"
 #include "../platform/Debugging.hpp"
-
 #include "../platform/Position.hpp"
 #include "../core/SplitVector.hpp"
 #include "../core/Partitioning.hpp"
 #include "../core/RunStyles.hpp"
 #include "../platform/SparseVector.hpp"
+
 #include "ChangeHistory.hpp"
 
 namespace Hyperion::Internal {

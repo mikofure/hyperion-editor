@@ -2,7 +2,7 @@
 /** @file HyperionBase.cpp
  ** An enhanced subclass of Editor with calltips, autocomplete and context menu.
  **/
-// Copyright 1998-2003 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2003 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>

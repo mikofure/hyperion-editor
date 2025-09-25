@@ -1,7 +1,7 @@
 /** @file Decoration.cpp
  ** Visual elements added over text.
  **/
-// Copyright 1998-2007 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2007 by Neil Hodgson <neilh@scintilla.org>
 // Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 

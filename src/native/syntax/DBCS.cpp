@@ -2,7 +2,7 @@
 /** @file DBCS.cpp
  ** Functions to handle DBCS double byte encodings like Shift-JIS.
  **/
-// Copyright 2017 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2017 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstdint>

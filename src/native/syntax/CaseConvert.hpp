@@ -4,7 +4,7 @@
  ** Performs Unicode case conversions.
  ** Does not handle locale-sensitive case conversion.
  **/
-// Copyright 2013 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2013 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef CASECONVERT_HPP

@@ -2,7 +2,8 @@
 /** @file CellBuffer.cpp
  ** Manages a buffer of cells.
  **/
-// Copyright 1998-2001 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -22,19 +23,18 @@
 #include <algorithm>
 #include <memory>
 
-#include "HyperionTypes.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Position.hpp"
+#include "../platform/SparseVector.hpp"
+#include "../api/ChangeHistory.hpp"
+#include "../syntax/UniConversion.hpp"
 
-#include "platform/Debugging.hpp"
-
-#include "platform/Position.hpp"
 #include "SplitVector.hpp"
 #include "Partitioning.hpp"
 #include "RunStyles.hpp"
-#include "platform/SparseVector.hpp"
-#include "api/ChangeHistory.hpp"
 #include "CellBuffer.hpp"
 #include "UndoHistory.hpp"
-#include "syntax/UniConversion.hpp"
 
 namespace Hyperion::Internal {
 

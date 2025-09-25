@@ -2,7 +2,7 @@
 /** @file Geometry.h
  ** Classes and functions for geometric and colour calculations.
  **/
-// Copyright 2020 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2020 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef GEOMETRY_HPP

@@ -2,7 +2,7 @@
 /** @file ContractionState.cpp
  ** Manages visibility of lines for folding and wrapping.
  **/
-// Copyright 1998-2007 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2007 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>

@@ -2,7 +2,8 @@
 /** @file EditModel.cpp
  ** Defines the editor state that must be visible to EditorView.
  **/
-// Copyright 1998-2014 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2014 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -22,35 +23,33 @@
 #include <algorithm>
 #include <memory>
 
-#include "HyperionTypes.hpp"
-#include "ILoader.hpp"
-#include "ILexer.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../include/ILoader.hpp"
+#include "../include/ILexer.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Geometry.hpp"
+#include "../platform/Platform.hpp"
+#include "../syntax/CharacterCategoryMap.hpp"
+#include "../platform/Position.hpp"
+#include "../syntax/UniqueString.hpp"
+#include "../view/Indicator.hpp"
+#include "../view/LineMarker.hpp"
+#include "../view/Style.hpp"
+#include "../view/ViewStyle.hpp"
+#include "../syntax/CharClassify.hpp"
+#include "../view/Decoration.hpp"
+#include "../syntax/CaseFolder.hpp"
+#include "../syntax/UniConversion.hpp"
+#include "../view/PositionCache.hpp"
 
-#include "platform/Debugging.hpp"
-#include "platform/Geometry.hpp"
-#include "platform/Platform.hpp"
-
-#include "syntax/CharacterCategoryMap.hpp"
-
-#include "platform/Position.hpp"
-#include "syntax/UniqueString.hpp"
+#include "Document.hpp"
+#include "Selection.hpp"
+#include "EditModel.hpp"
 #include "SplitVector.hpp"
 #include "Partitioning.hpp"
 #include "RunStyles.hpp"
 #include "ContractionState.hpp"
 #include "CellBuffer.hpp"
-#include "view/Indicator.hpp"
-#include "view/LineMarker.hpp"
-#include "view/Style.hpp"
-#include "view/ViewStyle.hpp"
-#include "syntax/CharClassify.hpp"
-#include "view/Decoration.hpp"
-#include "syntax/CaseFolder.hpp"
-#include "Document.hpp"
-#include "syntax/UniConversion.hpp"
-#include "Selection.hpp"
-#include "view/PositionCache.hpp"
-#include "EditModel.hpp"
 
 using namespace Hyperion;
 using namespace Hyperion::Internal;

@@ -2,7 +2,8 @@
 /** @file MarginView.cpp
  ** Defines the appearance of the editor margin.
  **/
-// Copyright 1998-2014 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2014 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -23,39 +24,40 @@
 #include <algorithm>
 #include <memory>
 
-#include "HyperionTypes.hpp"
-#include "HyperionMessages.hpp"
-#include "HyperionStructures.hpp"
-#include "ILoader.hpp"
-#include "ILexer.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../include/HyperionMessages.hpp"
+#include "../include/HyperionStructures.hpp"
+#include "../include/ILoader.hpp"
+#include "../include/ILexer.hpp"
 
-#include "platform/Debugging.hpp"
-#include "platform/Geometry.hpp"
-#include "platform/Platform.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Geometry.hpp"
+#include "../platform/Platform.hpp"
 
-#include "syntax/CharacterCategoryMap.hpp"
-#include "platform/Position.hpp"
-#include "syntax/UniqueString.hpp"
-#include "core/SplitVector.hpp"
-#include "core/Partitioning.hpp"
-#include "core/RunStyles.hpp"
-#include "core/ContractionState.hpp"
-#include "core/CellBuffer.hpp"
-#include "core/KeyMap.hpp"
+#include "../syntax/CharacterCategoryMap.hpp"
+#include "../platform/Position.hpp"
+#include "../syntax/UniqueString.hpp"
+#include "../core/SplitVector.hpp"
+#include "../core/Partitioning.hpp"
+#include "../core/RunStyles.hpp"
+#include "../core/ContractionState.hpp"
+#include "../core/CellBuffer.hpp"
+#include "../core/KeyMap.hpp"
+#include "../syntax/CharClassify.hpp"
+#include "../syntax/CaseFolder.hpp"
+#include "../core/Document.hpp"
+#include "../syntax/UniConversion.hpp"
+#include "../core/Selection.hpp"
+#include "../core/EditModel.hpp"
+
+#include "PositionCache.hpp"
+#include "Decoration.hpp"
+#include "MarginView.hpp"
+#include "EditView.hpp"
 #include "Indicator.hpp"
 #include "LineMarker.hpp"
 #include "Style.hpp"
 #include "ViewStyle.hpp"
-#include "syntax/CharClassify.hpp"
-#include "Decoration.hpp"
-#include "syntax/CaseFolder.hpp"
-#include "core/Document.hpp"
-#include "syntax/UniConversion.hpp"
-#include "core/Selection.hpp"
-#include "PositionCache.hpp"
-#include "core/EditModel.hpp"
-#include "MarginView.hpp"
-#include "EditView.hpp"
 
 using namespace Hyperion;
 

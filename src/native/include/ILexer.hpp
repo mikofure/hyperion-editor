@@ -2,13 +2,14 @@
 /** @file ILexer.h
  ** Interface between Hyperion and lexers.
  **/
-// Copyright 1998-2010 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2010 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef ILEXER_HPP
 #define ILEXER_HPP
 
-#include "Sci_Position.hpp"
+#include "Hyp_Position.hpp"
 
 namespace Hyperion {
 

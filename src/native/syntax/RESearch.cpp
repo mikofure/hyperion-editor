@@ -11,7 +11,7 @@
  *      York University
  *
  * Original code available from http://www.cs.yorku.ca/~oz/
- * Translation to C++ by Neil Hodgson neilh@Hyperion.org
+ * Translation to C++ by Neil Hodgson neilh@scintilla.org
  * Removed all use of register.
  * Converted to modern function prototypes.
  * Put all global/static variables into an object so this code can be
@@ -209,7 +209,7 @@
 #include <algorithm>
 #include <iterator>
 
-#include "platform/Position.hpp"
+#include "../platform/Position.hpp"
 #include "CharClassify.hpp"
 #include "RESearch.hpp"
 

@@ -1,7 +1,8 @@
 /** @file RunStyles.cpp
  ** Data structure used to store sparse styles.
  **/
-// Copyright 1998-2007 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2007 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -19,9 +20,9 @@
 #include <algorithm>
 #include <memory>
 
-#include "platform/Debugging.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Position.hpp"
 
-#include "platform/Position.hpp"
 #include "SplitVector.hpp"
 #include "Partitioning.hpp"
 #include "RunStyles.hpp"

@@ -2,7 +2,8 @@
 /** @file KeyMap.cpp
  ** Defines a mapping between keystrokes and commands.
  **/
-// Copyright 1998-2003 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2003 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstdlib>
@@ -15,12 +16,12 @@
 #include <optional>
 #include <memory>
 
-#include "HyperionTypes.hpp"
-#include "HyperionMessages.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../include/HyperionMessages.hpp"
 
-#include "platform/Debugging.hpp"
-#include "platform/Geometry.hpp"
-#include "platform/Platform.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Geometry.hpp"
+#include "../platform/Platform.hpp"
 
 #include "KeyMap.hpp"
 

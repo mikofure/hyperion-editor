@@ -2,7 +2,7 @@
 /** @file SparseVector.h
  ** Hold data sparsely associated with elements in a range.
  **/
-// Copyright 2016 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2016 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef SPARSEVECTOR_HPP

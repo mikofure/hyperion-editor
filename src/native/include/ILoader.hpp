@@ -3,13 +3,14 @@
  ** Interface for loading into a Hyperion document from a background thread.
  ** Interface for manipulating a document without a view.
  **/
-// Copyright 1998-2017 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2017 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef ILOADER_HPP
 #define ILOADER_HPP
 
-#include "Sci_Position.hpp"
+#include "Hyp_Position.hpp"
 
 namespace Hyperion {
 

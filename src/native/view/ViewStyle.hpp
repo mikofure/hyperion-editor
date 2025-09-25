@@ -2,7 +2,7 @@
 /** @file ViewStyle.h
  ** Store information on how the document is to be viewed.
  **/
-// Copyright 1998-2001 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef VIEWSTYLE_HPP

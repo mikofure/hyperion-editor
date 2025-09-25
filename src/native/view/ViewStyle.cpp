@@ -2,7 +2,8 @@
 /** @file ViewStyle.cpp
  ** Store information on how the document is to be viewed.
  **/
-// Copyright 1998-2003 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2003 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -23,17 +24,16 @@
 #include <memory>
 #include <numeric>
 
-#include "HyperionTypes.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Geometry.hpp"
+#include "../platform/Platform.hpp"
+#include "../platform/Position.hpp"
+#include "../syntax/UniqueString.hpp"
+#include "../platform/XPM.hpp"
 
-#include "platform/Debugging.hpp"
-#include "platform/Geometry.hpp"
-#include "platform/Platform.hpp"
-
-#include "platform/Position.hpp"
-#include "syntax/UniqueString.hpp"
-#include "Indicator.hpp"
-#include "platform/XPM.hpp"
 #include "LineMarker.hpp"
+#include "Indicator.hpp"
 #include "Style.hpp"
 #include "ViewStyle.hpp"
 

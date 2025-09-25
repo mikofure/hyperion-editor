@@ -2,7 +2,7 @@
 /** @file XPM.cpp
  ** Define a class that holds data in the X Pixmap (XPM) format.
  **/
-// Copyright 1998-2003 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2003 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstdlib>
@@ -19,7 +19,7 @@
 #include <iterator>
 #include <memory>
 
-#include "HyperionTypes.hpp"
+#include "../include/HyperionTypes.hpp"
 
 #include "Debugging.hpp"
 #include "Geometry.hpp"

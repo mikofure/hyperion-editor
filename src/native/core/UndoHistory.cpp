@@ -2,7 +2,8 @@
 /** @file UndoHistory.cpp
  ** Manages undo for the document.
  **/
-// Copyright 1998-2024 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2024 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -22,16 +23,15 @@
 #include <algorithm>
 #include <memory>
 
-#include "HyperionTypes.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Position.hpp"
+#include "../platform/SparseVector.hpp"
+#include "../api/ChangeHistory.hpp"
 
-#include "platform/Debugging.hpp"
-
-#include "platform/Position.hpp"
 #include "SplitVector.hpp"
 #include "Partitioning.hpp"
 #include "RunStyles.hpp"
-#include "platform/SparseVector.hpp"
-#include "api/ChangeHistory.hpp"
 #include "CellBuffer.hpp"
 #include "UndoHistory.hpp"
 

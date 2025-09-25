@@ -2,7 +2,8 @@
 /** @file Document.cpp
  ** Text document that handles notifications, DBCS, styling, words and end of line.
  **/
-// Copyright 1998-2011 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2011 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -29,27 +30,26 @@
 #include <regex>
 #endif
 
-#include "HyperionTypes.hpp"
-#include "ILoader.hpp"
-#include "ILexer.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../include/ILoader.hpp"
+#include "../include/ILexer.hpp"
+#include "../platform/Debugging.hpp"
+#include "../syntax/CharacterType.hpp"
+#include "../syntax/CharacterCategoryMap.hpp"
+#include "../platform/Position.hpp"
+#include "../syntax/CharClassify.hpp"
+#include "../view/Decoration.hpp"
+#include "../syntax/CaseFolder.hpp"
+#include "../syntax/RESearch.hpp"
+#include "../syntax/UniConversion.hpp"
+#include "../platform/ElapsedPeriod.hpp"
 
-#include "platform/Debugging.hpp"
-
-#include "syntax/CharacterType.hpp"
-#include "syntax/CharacterCategoryMap.hpp"
-#include "platform/Position.hpp"
 #include "SplitVector.hpp"
 #include "Partitioning.hpp"
 #include "RunStyles.hpp"
 #include "CellBuffer.hpp"
 #include "PerLine.hpp"
-#include "syntax/CharClassify.hpp"
-#include "view/Decoration.hpp"
-#include "syntax/CaseFolder.hpp"
 #include "Document.hpp"
-#include "syntax/RESearch.hpp"
-#include "syntax/UniConversion.hpp"
-#include "platform/ElapsedPeriod.hpp"
 
 using namespace Hyperion;
 using namespace Hyperion::Internal;

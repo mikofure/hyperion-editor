@@ -2,7 +2,7 @@
 /** @file UndoHistory.h
  ** Manages undo for the document.
  **/
-// Copyright 1998-2024 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2024 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef UNDOHISTORY_HPP

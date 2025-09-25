@@ -3,7 +3,7 @@
  ** Interface to platform facilities. Also includes some basic utilities.
  ** Implemented in PlatGTK.cpp for GTK+/Linux, PlatWin.cpp for Windows, and PlatWX.cpp for wxWindows.
  **/
-// Copyright 1998-2009 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2009 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef PLATFORM_HPP

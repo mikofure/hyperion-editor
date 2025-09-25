@@ -2,7 +2,8 @@
 /** @file CallTip.cpp
  ** Code for displaying call tips.
  **/
-// Copyright 1998-2001 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -21,14 +22,13 @@
 #include <algorithm>
 #include <memory>
 
-#include "HyperionTypes.hpp"
-#include "HyperionMessages.hpp"
-
+#include "../include/HyperionTypes.hpp"
+#include "../include/HyperionMessages.hpp"
 #include "../platform/Debugging.hpp"
 #include "../platform/Geometry.hpp"
 #include "../platform/Platform.hpp"
-
 #include "../platform/Position.hpp"
+
 #include "CallTip.hpp"
 
 using namespace Hyperion;

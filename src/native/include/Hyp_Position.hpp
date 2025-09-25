@@ -3,7 +3,7 @@
  ** Define the Sci_Position type used in Hyperion's external interfaces.
  ** These need to be available to clients written in C so are not in a C++ namespace.
  **/
-// Copyright 2015 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2015 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef SCI_POSITION_HPP

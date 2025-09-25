@@ -2,7 +2,7 @@
 /** @file UniqueString.cpp
  ** Define an allocator for UniqueString.
  **/
-// Copyright 2017 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2017 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <string_view>

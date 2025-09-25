@@ -2,7 +2,7 @@
 /** @file EditModel.h
  ** Defines the editor state that must be visible to EditorView.
  **/
-// Copyright 1998-2014 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2014 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef EDITMODEL_HPP

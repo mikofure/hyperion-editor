@@ -4,11 +4,12 @@
  ** The same structures are defined for C in Hyperion.h.
  ** Uses definitions from HyperionTypes.h.
  **/
-// Copyright 2021 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2021 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef HyperionSTRUCTURES_HPP
-#define HyperionSTRUCTURES_HPP
+#define HYPERIONSTRUCTURES_HPP
 
 namespace Hyperion {
 

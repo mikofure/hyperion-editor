@@ -2,7 +2,7 @@
 /** @file LineMarker.h
  ** Defines the look of a line marker in the margin .
  **/
-// Copyright 1998-2011 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2011 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef LINEMARKER_HPP

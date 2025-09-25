@@ -4,7 +4,7 @@
  ** Similar code to Lexilla's lexilla/lexlib/CharacterCategory.h but renamed
  ** to avoid problems with builds that statically include both Hyperion and Lexilla.
  **/
-// Copyright 2013 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2013 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef CHARACTERCATEGORYMAP_HPP

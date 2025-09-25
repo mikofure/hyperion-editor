@@ -2,7 +2,7 @@
 /** @file Partitioning.h
  ** Data structure used to partition an interval. Used for holding line start/end positions.
  **/
-// Copyright 1998-2007 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2007 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef PARTITIONING_HPP

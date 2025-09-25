@@ -2,7 +2,7 @@
 /** @file CharClassify.cpp
  ** Character classifications used by Document and RESearch.
  **/
-// Copyright 2006 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2006 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstdlib>

@@ -3,7 +3,7 @@
  ** Main data structure for holding arrays that handle insertions
  ** and deletions efficiently.
  **/
-// Copyright 1998-2007 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2007 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef SPLITVECTOR_HPP

@@ -2,7 +2,7 @@
 /** @file CaseFolder.h
  ** Classes for case folding.
  **/
-// Copyright 1998-2013 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2013 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef CASEFOLDER_HPP

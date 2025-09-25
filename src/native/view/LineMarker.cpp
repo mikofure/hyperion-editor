@@ -2,7 +2,8 @@
 /** @file LineMarker.cpp
  ** Defines the look of a line marker in the margin.
  **/
-// Copyright 1998-2011 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 1998-2011 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstdint>
@@ -19,16 +20,14 @@
 #include <iterator>
 #include <memory>
 
-#include "HyperionTypes.hpp"
+#include "../include/HyperionTypes.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Geometry.hpp"
+#include "../platform/Platform.hpp"
+#include "../platform/XPM.hpp"
+#include "../syntax/UniConversion.hpp"
 
-#include "platform/Debugging.hpp"
-#include "platform/Geometry.hpp"
-
-#include "platform/Platform.hpp"
-
-#include "platform/XPM.hpp"
 #include "LineMarker.hpp"
-#include "syntax/UniConversion.hpp"
 
 using namespace Hyperion;
 using namespace Hyperion::Internal;

@@ -2,7 +2,7 @@
 /** @file Selection.cpp
  ** Classes maintaining the selection.
  **/
-// Copyright 2009 by Neil Hodgson <neilh@Hyperion.org>
+// Copyright 2009 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #include <cstddef>
@@ -17,9 +17,9 @@
 #include <memory>
 #include <charconv>
 
-#include "platform/Debugging.hpp"
+#include "../platform/Debugging.hpp"
+#include "../platform/Position.hpp"
 
-#include "platform/Position.hpp"
 #include "Selection.hpp"
 
 using namespace Hyperion::Internal;
