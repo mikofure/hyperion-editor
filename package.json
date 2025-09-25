@@ -17,7 +17,8 @@
     "dev": "tsc --watch",
     "build:demo": "vite build",
     "test": "echo \"Tests not configured yet\"",
-    "example": "echo \"See src/test/example.ts for usage examples\""
+    "example": "echo \"See src/test/example.ts for usage examples\"",
+    "check": "tsc --noEmit"
   },
   "keywords": [
     "text-editor",
