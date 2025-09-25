@@ -5,9 +5,7 @@
 // Copyright 2006-2009 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef CHARCLASSIFY_HPP
-#define CHARCLASSIFY_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 enum class CharacterClass : unsigned char { space, newLine, word, punctuation };
@@ -28,5 +26,3 @@ private:
 };
 
 }
-
-#endif

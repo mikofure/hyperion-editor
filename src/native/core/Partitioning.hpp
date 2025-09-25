@@ -5,8 +5,8 @@
 // Copyright 1998-2007 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef PARTITIONING_HPP
-#define PARTITIONING_HPP
+#pragma once
+#include "SplitVector.hpp"
 
 namespace Hyperion::Internal {
 
@@ -233,5 +233,3 @@ public:
 
 
 }
-
-#endif

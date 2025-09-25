@@ -7,8 +7,10 @@
 /// Styling buffer using one element for each run rather than using
 /// a filled buffer.
 
-#ifndef RUNSTYLES_HPP
-#define RUNSTYLES_HPP
+#pragma once
+
+#include "Partitioning.hpp"
+#include "SplitVector.hpp"
 
 namespace Hyperion::Internal {
 
@@ -54,5 +56,3 @@ public:
 };
 
 }
-
-#endif

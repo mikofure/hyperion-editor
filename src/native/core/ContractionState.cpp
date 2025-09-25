@@ -16,15 +16,15 @@
 #include <algorithm>
 #include <memory>
 
-#include "platform/Debugging.hpp"
+#include "../platform/Debugging.hpp"
 
-#include "platform/Position.hpp"
-#include "syntax/UniqueString.hpp"
-#include "core/SplitVector.hpp"
-#include "core/Partitioning.hpp"
-#include "core/RunStyles.hpp"
-#include "platform/SparseVector.hpp"
-#include "core/ContractionState.hpp"
+#include "../platform/Position.hpp"
+#include "../syntax/UniqueString.hpp"
+#include "../core/SplitVector.hpp"
+#include "../core/Partitioning.hpp"
+#include "../core/RunStyles.hpp"
+#include "../platform/SparseVector.hpp"
+#include "../core/ContractionState.hpp"
 
 using namespace Hyperion::Internal;
 

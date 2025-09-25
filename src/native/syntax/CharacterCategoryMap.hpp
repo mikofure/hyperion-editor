@@ -7,9 +7,7 @@
 // Copyright 2013 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef CHARACTERCATEGORYMAP_HPP
-#define CHARACTERCATEGORYMAP_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 enum CharacterCategory {
@@ -48,5 +46,3 @@ public:
 };
 
 }
-
-#endif

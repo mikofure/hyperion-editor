@@ -5,9 +5,7 @@
 // Copyright 2018 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef ELAPSEDPERIOD_HPP
-#define ELAPSEDPERIOD_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 // Simplified access to high precision timing.
@@ -31,5 +29,3 @@ public:
 };
 
 }
-
-#endif

@@ -5,9 +5,7 @@
 // Copyright 2007 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef CHARACTERTYPE_HPP
-#define CHARACTERTYPE_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 // Functions for classifying characters
@@ -138,5 +136,3 @@ int CompareCaseInsensitive(const char *a, const char *b) noexcept;
 int CompareNCaseInsensitive(const char *a, const char *b, size_t len) noexcept;
 
 }
-
-#endif

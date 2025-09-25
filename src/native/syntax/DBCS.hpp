@@ -5,9 +5,7 @@
 // Copyright 2017 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef DBCS_HPP
-#define DBCS_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 constexpr int cp932 = 932;
@@ -47,5 +45,3 @@ FoldMap *DBCSGetMutableFoldMap(int codePage);
 const FoldMap *DBCSGetFoldMap(int codePage);
 
 }
-
-#endif

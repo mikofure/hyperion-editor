@@ -5,9 +5,7 @@
 // Copyright 1998-2024 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef UNDOHISTORY_HPP
-#define UNDOHISTORY_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 // ScaledVector is a vector of unsigned integers that uses elements sized to hold the largest value.
@@ -157,5 +155,3 @@ public:
 };
 
 }
-
-#endif

@@ -5,8 +5,18 @@
 // Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef VIEWSTYLE_HPP
-#define VIEWSTYLE_HPP
+#pragma once
+
+#include <vector>
+#include <map>
+#include <set>
+#include <string>
+#include <memory>
+#include <optional>
+#include "Style.hpp"
+#include "LineMarker.hpp"
+#include "Indicator.hpp"
+#include "../syntax/UniqueString.hpp"
 
 namespace Hyperion::Internal {
 
@@ -254,5 +264,3 @@ private:
 };
 
 }
-
-#endif

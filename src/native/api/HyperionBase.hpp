@@ -5,8 +5,13 @@
 // Copyright 1998-2002 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef HyperionBASE_HPP
-#define HYPERIONBASE_HPP
+#pragma once
+#include "../include/Hyperion.hpp"
+#include "../include/HyperionStructures.hpp"
+
+#include "CallTip.hpp"
+#include "AutoComplete.hpp"
+#include "Editor.hpp"
 
 namespace Hyperion::Internal {
 
@@ -104,5 +109,3 @@ public:
 };
 
 }
-
-#endif

@@ -5,9 +5,7 @@
 // Copyright 1998-2014 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef MARGINVIEW_HPP
-#define MARGINVIEW_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 void DrawWrapMarker(Surface *surface, PRectangle rcPlace, bool isEndMarker, ColourRGBA wrapColour);
@@ -43,5 +41,3 @@ public:
 };
 
 }
-
-#endif

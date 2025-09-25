@@ -7,9 +7,7 @@
 /* Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
 // Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
  * The License.txt file describes the conditions under which this software may be distributed. */
-
-#ifndef HYPERIONWIDGET_HPP
-#define HYPERIONWIDGET_HPP
+#pragma once
 
 #if defined(GTK)
 
@@ -66,8 +64,6 @@ void		Hyperion_release_resources(void);
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif
 
 #endif

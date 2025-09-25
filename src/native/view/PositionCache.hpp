@@ -5,10 +5,25 @@
 // Copyright 1998-2009 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef POSITIONCACHE_HPP
-#define POSITIONCACHE_HPP
+#pragma once
+#include <vector>
+#include <map>
+#include <string>
+#include <memory>
+#include <string_view>
+
+#include "../platform/Position.hpp"
+#include "../platform/Platform.hpp"
+#include "../core/Range.hpp"
+#include "../core/Selection.hpp"
+#include "../syntax/UniConversion.hpp"  
+#include "ViewStyle.hpp"
 
 namespace Hyperion::Internal {
+
+// Forward declarations
+class Document;
+enum class EncodingFamily;
 
 /**
 * A point in document space.
@@ -222,7 +237,7 @@ struct TextSegment {
 // Class to break a line of text into shorter runs at sensible places.
 class BreakFinder {
 	const LineLayout *ll;
-	const Range lineRange;
+	Range lineRange;
 	int nextBreak;
 	std::vector<int> selAndEdge;
 	unsigned int saeCurrentPos;
@@ -233,10 +248,11 @@ class BreakFinder {
 	const SpecialRepresentations *preprs;
 	void Insert(Sci::Position val);
 public:
-	// If a whole run is longer than lengthStartSubdivision then subdivide
-	// into smaller runs at spaces or punctuation.
+	// If a whole line is longer than lengthStartSubdivision then subdivide each run
+	// of characters with the same style, subdividing up to lengthEachSubdivision characters.
+	// This is because lengths beyond lengthStartSubdivision are slow in UpdatePositions.
 	enum { lengthStartSubdivision = 300 };
-	// Try to make each subdivided run lengthEachSubdivision or shorter.
+	// For lines longer than lengthStartSubdivision, each subdivision is lengthEachSubdivision long.
 	enum { lengthEachSubdivision = 100 };
 	enum class BreakFor {
 		Text = 0,
@@ -269,5 +285,3 @@ public:
 std::unique_ptr<IPositionCache> CreatePositionCache();
 
 }
-
-#endif

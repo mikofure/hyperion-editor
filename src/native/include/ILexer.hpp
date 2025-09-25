@@ -6,16 +6,29 @@
 // Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef ILEXER_HPP
-#define ILEXER_HPP
-
+#pragma once
 #include "Hyp_Position.hpp"
+
+// Include export macros
+#ifndef HYPERION_API
+  #ifdef _WIN32
+    #ifdef HYPERION_EXPORTS
+      #define HYPERION_API __declspec(dllexport)
+    #elif defined(HYPERION_DLL)
+      #define HYPERION_API __declspec(dllimport)
+    #else
+      #define HYPERION_API
+    #endif
+  #else
+    #define HYPERION_API
+  #endif
+#endif
 
 namespace Hyperion {
 
 enum { dvRelease4=2 };
 
-class IDocument {
+class HYPERION_API IDocument {
 public:
 	virtual int SCI_METHOD Version() const = 0;
 	virtual void SCI_METHOD SetErrorStatus(int status) = 0;
@@ -45,7 +58,7 @@ public:
 
 enum { lvRelease4=2, lvRelease5=3 };
 
-class ILexer4 {
+class HYPERION_API ILexer4 {
 public:
 	virtual int SCI_METHOD Version() const = 0;
 	virtual void SCI_METHOD Release() = 0;
@@ -74,7 +87,7 @@ public:
 	virtual const char * SCI_METHOD DescriptionOfStyle(int style) = 0;
 };
 
-class ILexer5 : public ILexer4 {
+class HYPERION_API ILexer5 : public ILexer4 {
 public:
 	virtual const char * SCI_METHOD GetName() = 0;
 	virtual int SCI_METHOD  GetIdentifier() = 0;
@@ -82,5 +95,3 @@ public:
 };
 
 }
-
-#endif

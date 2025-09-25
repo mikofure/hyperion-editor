@@ -5,9 +5,7 @@
 // Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef CALLTIP_HPP
-#define CALLTIP_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 struct Chunk {
@@ -93,5 +91,3 @@ public:
 };
 
 }
-
-#endif

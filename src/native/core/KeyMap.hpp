@@ -5,9 +5,7 @@
 // Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef KEYMAP_HPP
-#define KEYMAP_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 #define SCI_NORM KeyMod::Norm
@@ -61,5 +59,3 @@ public:
 };
 
 }
-
-#endif

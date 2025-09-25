@@ -1,8 +1,8 @@
 // GUI exports
-export { TextRenderer } from './TextRenderer.js';
-export type { Theme } from './TextRenderer.js';
+export { TextRenderer } from './TextRenderer';
+export type { Theme } from './TextRenderer';
 
-export { EditorView } from './EditorView.js';
+export { EditorView } from './EditorView';
 
 // Re-export theme system
-export * from './themes/index.js';
+export * from './themes/index';

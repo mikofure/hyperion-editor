@@ -5,9 +5,7 @@
 // Copyright 1998-2004 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef CELLBUFFER_HPP
-#define CELLBUFFER_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 // Interface to per-line data that wants to see each line insertion and deletion
@@ -205,5 +203,3 @@ public:
 };
 
 }
-
-#endif

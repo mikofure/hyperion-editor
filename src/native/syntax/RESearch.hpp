@@ -6,9 +6,7 @@
 // Based on the work of Ozan S. Yigit.
 // This file is in the public domain.
 
-#ifndef RESEARCH_HPP
-#define RESEARCH_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 class CharacterIndexer {
@@ -66,6 +64,3 @@ private:
 };
 
 }
-
-#endif
-

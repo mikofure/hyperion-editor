@@ -5,9 +5,7 @@
 // Copyright 1998-2011 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef LINEMARKER_HPP
-#define LINEMARKER_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 class XPM;
@@ -54,5 +52,3 @@ public:
 };
 
 }
-
-#endif

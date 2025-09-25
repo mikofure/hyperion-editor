@@ -55,94 +55,74 @@ set(HYPERION_SOURCES
     src/native/view/ViewStyle.cpp
 )
 
-set(HYPERION_HEADERS
-    # include headers
-    src/native/include/Hyperion.hpp
-    src/native/include/HyperionCall.hpp
-    src/native/include/HyperionMessages.hpp
-    src/native/include/HyperionStructures.hpp
-    src/native/include/HyperionTypes.hpp
-    src/native/include/HyperionWidget.hpp
-    src/native/include/Hyp_Position.hpp
-    src/native/include/ILexer.hpp
-    src/native/include/ILoader.hpp
-
-    # api headers
-    src/native/api/AutoComplete.hpp
-    src/native/api/CallTip.hpp
-    src/native/api/ChangeHistory.hpp
-    src/native/api/Editor.hpp
-    src/native/api/HyperionBase.hpp
-
-    # core headers
-    src/native/core/CellBuffer.hpp
-    src/native/core/ContractionState.hpp
-    src/native/core/Document.hpp
-    src/native/core/EditModel.hpp
-    src/native/core/KeyMap.hpp
-    src/native/core/Partitioning.hpp
-    src/native/core/PerLine.hpp
-    src/native/core/RunStyles.hpp
-    src/native/core/Selection.hpp
-    src/native/core/SplitVector.hpp
-    src/native/core/UndoHistory.hpp
-
-    # platform headers
-    src/native/platform/Debugging.hpp
-    src/native/platform/ElapsedPeriod.hpp
-    src/native/platform/Geometry.hpp
-    src/native/platform/Platform.hpp
-    src/native/platform/Position.hpp
-    src/native/platform/SparseVector.hpp
-    src/native/platform/XPM.hpp
-
-    # syntax headers
-    src/native/syntax/CaseConvert.hpp
-    src/native/syntax/CaseFolder.hpp
-    src/native/syntax/CharacterCategoryMap.hpp
-    src/native/syntax/CharacterType.hpp
-    src/native/syntax/CharClassify.hpp
-    src/native/syntax/DBCS.hpp
-    src/native/syntax/RESearch.hpp
-    src/native/syntax/UniConversion.hpp
-    src/native/syntax/UniqueString.hpp
-
-    # view headers
-    src/native/view/Decoration.hpp
-    src/native/view/EditView.hpp
-    src/native/view/Indicator.hpp
-    src/native/view/LineMarker.hpp
-    src/native/view/MarginView.hpp
-    src/native/view/PositionCache.hpp
-    src/native/view/Style.hpp
-    src/native/view/ViewStyle.hpp
-)
-
 # -----------------------------
-# Build HyperionCore library
+# Build HyperionCore libraries (both static and shared)
 # -----------------------------
+
+# Static library (.lib) - always available
 add_library(HyperionCore STATIC
     ${HYPERION_SOURCES}
-    ${HYPERION_HEADERS}
 )
 
 target_include_directories(HyperionCore PUBLIC
     src/native/include
-    src/native/api
-    src/native/core
-    src/native/platform
-    src/native/syntax
-    src/native/view
+)
+
+# Option to build shared library
+option(BUILD_SHARED_LIB "Build shared library (.dll)" OFF)
+
+if(BUILD_SHARED_LIB)
+    # Note: Shared library requires platform-specific implementations for:
+    # - Platform::Assert, Platform::DebugPrintf, Platform::DoubleClickTime
+    # - Platform::Chrome, Platform::ChromeHighlight, Platform::DefaultFont, Platform::DefaultFontSize
+    # - Window, Surface, ListBox, Menu classes
+    # These are not included in the current source list and need to be implemented
+    # for the target platform (Windows, Linux, macOS, etc.)
+    
+    add_library(HyperionCore_Shared SHARED
+        ${HYPERION_SOURCES}
+        # Platform stubs for missing implementations
+        src/native/platform/PlatformStubs.cpp
+    )
+
+    target_include_directories(HyperionCore_Shared PUBLIC
+        src/native/include
+    )
+
+    # Set output names to avoid conflicts
+    set_target_properties(HyperionCore_Shared PROPERTIES
+        OUTPUT_NAME "HyperionCore"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    )
+
+    # Define export macro for DLL
+    target_compile_definitions(HyperionCore_Shared PRIVATE
+        HYPERION_EXPORTS
+    )
+
+    target_compile_definitions(HyperionCore_Shared INTERFACE
+        HYPERION_DLL
+    )
+endif()
+
+# Set output names to avoid conflicts
+set_target_properties(HyperionCore PROPERTIES
+    OUTPUT_NAME "HyperionCore_static"
 )
 
 # Example: link dependencies
 # target_link_libraries(HyperionCore PRIVATE SDL3::SDL3)
+# if(BUILD_SHARED_LIB)
+#     target_link_libraries(HyperionCore_Shared PRIVATE SDL3::SDL3)
+# endif()
 
 # -----------------------------
 # Example executable
 # -----------------------------
-add_executable(hyperion_app
-    src/native/HyperionCall.cpp   # entry point if you want a demo
-)
+# add_executable(hyperion_app
+#     src/native/HyperionCall.cpp  
+# )
 
-target_link_libraries(hyperion_app PRIVATE HyperionCore)
+# target_link_libraries(hyperion_app PRIVATE HyperionCore)

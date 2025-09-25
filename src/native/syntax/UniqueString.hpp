@@ -8,9 +8,7 @@
 // Copyright 2017 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef UNIQUESTRING_HPP
-#define UNIQUESTRING_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 constexpr bool IsNullOrEmpty(const char *text) noexcept {
@@ -35,5 +33,3 @@ public:
 };
 
 }
-
-#endif

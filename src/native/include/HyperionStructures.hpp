@@ -8,9 +8,7 @@
 // Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef HyperionSTRUCTURES_HPP
-#define HYPERIONSTRUCTURES_HPP
-
+#pragma once
 namespace Hyperion {
 
 using PositionCR = long;
@@ -130,5 +128,3 @@ struct NotificationData {
 };
 
 }
-
-#endif

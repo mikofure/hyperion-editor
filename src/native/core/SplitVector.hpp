@@ -6,9 +6,7 @@
 // Copyright 1998-2007 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef SPLITVECTOR_HPP
-#define SPLITVECTOR_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 template <typename T>
@@ -336,5 +334,3 @@ public:
 };
 
 }
-
-#endif

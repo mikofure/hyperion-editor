@@ -7,9 +7,7 @@
 // Copyright 2013 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef CASECONVERT_HPP
-#define CASECONVERT_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 enum class CaseConversion {
@@ -42,5 +40,3 @@ size_t CaseConvertString(char *converted, size_t sizeConverted, const char *mixe
 std::string CaseConvertString(const std::string &s, CaseConversion conversion);
 
 }
-
-#endif

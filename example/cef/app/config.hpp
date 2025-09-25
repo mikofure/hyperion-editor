@@ -1,6 +1,4 @@
-#ifndef APP_CONFIG_HPP
-#define APP_CONFIG_HPP
-
+#pragma once
 #include <string>
 #include <sstream>
 #include <iomanip>

@@ -5,8 +5,15 @@
 // Copyright 1998-2009 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef PERLINE_HPP
-#define PERLINE_HPP
+#pragma once
+
+#include <forward_list>
+#include <memory>
+#include <vector>
+
+#include "SplitVector.hpp"
+#include "CellBuffer.hpp"
+#include "../platform/SparseVector.hpp"
 
 namespace Hyperion::Internal {
 
@@ -136,5 +143,3 @@ public:
 };
 
 }
-
-#endif

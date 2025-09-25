@@ -5,8 +5,13 @@
 // Copyright 2016 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef SPARSEVECTOR_HPP
-#define SPARSEVECTOR_HPP
+#pragma once
+#include <vector>
+#include <map>
+#include <string>
+
+#include "../core/Partitioning.hpp"
+#include "../core/SplitVector.hpp"
 
 namespace Hyperion::Internal {
 
@@ -222,5 +227,3 @@ public:
 };
 
 }
-
-#endif

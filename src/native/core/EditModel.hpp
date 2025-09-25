@@ -5,8 +5,14 @@
 // Copyright 1998-2014 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef EDITMODEL_HPP
-#define EDITMODEL_HPP
+#pragma once
+
+#include <memory>
+#include <string>
+#include <map>
+
+#include "ContractionState.hpp"
+#include "../view/PositionCache.hpp"
 
 namespace Hyperion::Internal {
 
@@ -115,5 +121,3 @@ public:
 };
 
 }
-
-#endif

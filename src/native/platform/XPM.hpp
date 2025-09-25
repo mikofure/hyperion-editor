@@ -5,9 +5,7 @@
 // Copyright 1998-2003 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef XPM_HPP
-#define XPM_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 /**
@@ -82,5 +80,3 @@ public:
 };
 
 }
-
-#endif

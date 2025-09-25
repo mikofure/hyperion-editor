@@ -7,14 +7,27 @@
 // Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef ILOADER_HPP
-#define ILOADER_HPP
-
+#pragma once
 #include "Hyp_Position.hpp"
+
+// Include export macros
+#ifndef HYPERION_API
+  #ifdef _WIN32
+    #ifdef HYPERION_EXPORTS
+      #define HYPERION_API __declspec(dllexport)
+    #elif defined(HYPERION_DLL)
+      #define HYPERION_API __declspec(dllimport)
+    #else
+      #define HYPERION_API
+    #endif
+  #else
+    #define HYPERION_API
+  #endif
+#endif
 
 namespace Hyperion {
 
-class ILoader {
+class HYPERION_API ILoader {
 public:
 	virtual int SCI_METHOD Release() = 0;
 	// Returns a status code from SC_STATUS_*
@@ -24,7 +37,7 @@ public:
 
 static constexpr int deRelease0 = 0;
 
-class IDocumentEditable {
+class HYPERION_API IDocumentEditable {
 public:
 	// Allow this interface to add methods over time and discover whether new methods available.
 	virtual int SCI_METHOD DEVersion() const noexcept = 0;
@@ -35,5 +48,3 @@ public:
 };
 
 }
-
-#endif

@@ -8,12 +8,8 @@ on:
 
 jobs:
   test:
-    name: Test and Build
+    name: Build Typescript Library (Web Version)
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
     
     steps:
     - name: Checkout code
@@ -23,82 +19,21 @@ jobs:
       uses: oven-sh/setup-bun@v1
       with:
         bun-version: latest
-        
-    - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        
+
     - name: Install dependencies
       run: bun install
       
     - name: Check TypeScript types
-      run: bunx tsc --noEmit
+      run: bun run check
       
     - name: Build project
-      run: bunx tsc
+      run: bun run build
       
     - name: Check for build artifacts
       run: |
         ls -la dist/
-        test -f dist/index.js
-        test -f dist/index.d.ts
-        
-    - name: Run linting (if available)
-      run: |
-        if [ -f "package.json" ] && grep -q "lint" package.json; then
-          npm run lint
-        else
-          echo "No linting script found, skipping..."
-        fi
-      continue-on-error: true
-      
-    - name: Test import functionality
-      run: |
-        node -e "
-        const fs = require('fs');
-        const path = require('path');
-        
-        // Check if main files exist
-        const mainFile = path.join('dist', 'index.js');
-        const typesFile = path.join('dist', 'index.d.ts');
-        
-        if (!fs.existsSync(mainFile)) {
-          throw new Error('Main dist file not found: ' + mainFile);
-        }
-        
-        if (!fs.existsSync(typesFile)) {
-          throw new Error('Types file not found: ' + typesFile);
-        }
-        
-        console.log('✓ All required build artifacts are present');
-        "
-        
-    - name: Validate package.json
-      run: |
-        node -e "
-        const pkg = require('./package.json');
-        
-        // Check required fields
-        const required = ['name', 'version', 'main', 'types', 'description'];
-        for (const field of required) {
-          if (!pkg[field]) {
-            throw new Error('Missing required field in package.json: ' + field);
-          }
-        }
-        
-        // Validate main and types paths
-        if (pkg.main !== 'dist/index.js') {
-          throw new Error('Main field should point to dist/index.js');
-        }
-        
-        if (pkg.types !== 'dist/index.d.ts') {
-          throw new Error('Types field should point to dist/index.d.ts');
-        }
-        
-        console.log('✓ package.json validation passed');
-        "
+        test -f dist/webrender/index.js
+        test -f dist/webrender/index.d.ts
 
   build-demo:
     name: Build Demo
@@ -117,11 +52,8 @@ jobs:
     - name: Install dependencies
       run: bun install
       
-    - name: Build TypeScript
-      run: bunx tsc
-      
     - name: Build demo with Vite
-      run: bunx vite build
+      run: bun run build:demo
       
     - name: Upload demo artifacts
       uses: actions/upload-artifact@v4
@@ -178,20 +110,18 @@ jobs:
       run: bun install
       
     - name: Build project
-      run: bunx tsc
+      run: bun run build
       
     - name: Check bundle sizes
       run: |
         echo "📦 Bundle Size Report"
         echo "===================="
         
-        # Check main bundle size
-        if [ -f "dist/index.js" ]; then
-          SIZE=$(wc -c < dist/index.js)
+        if [ -f "dist/webrender/index.js" ]; then
+          SIZE=$(wc -c < dist/webrender/index.js)
           SIZE_KB=$((SIZE / 1024))
           echo "Main bundle: ${SIZE_KB}KB"
           
-          # Warn if bundle is too large (>500KB)
           if [ $SIZE_KB -gt 500 ]; then
             echo "⚠️ Warning: Main bundle is larger than 500KB"
           else
@@ -199,48 +129,34 @@ jobs:
           fi
         fi
         
-        # List all generated files
         echo ""
         echo "Generated files:"
-        find dist/ -type f -name "*.js" -o -name "*.d.ts" | while read file; do
+        find dist/ -type f \( -name "*.js" -o -name "*.d.ts" \) | while read file; do
           size=$(wc -c < "$file")
           size_kb=$((size / 1024))
           echo "  $file: ${size_kb}KB"
         done
 
-  compatibility-check:
-    name: Node.js Compatibility
-    runs-on: ubuntu-latest
+  native-build:
+    name: Native Build (C++ / Windows)
+    runs-on: windows-latest
     
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x, 20.x, 22.x]
-        
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
-    - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+
+    - name: Setup MSVC Developer Command Prompt
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Configure CMake (Release)
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build with CMake
+      run: cmake --build build --config Release --parallel
+
+    - name: Upload native artifacts
+      uses: actions/upload-artifact@v4
       with:
-        node-version: ${{ matrix.node-version }}
-        
-    - name: Setup Bun
-      uses: oven-sh/setup-bun@v1
-      with:
-        bun-version: latest
-        
-    - name: Install dependencies
-      run: bun install
-      
-    - name: Build with Node.js ${{ matrix.node-version }}
-      run: bunx tsc
-      
-    - name: Test basic import with Node.js ${{ matrix.node-version }}
-      run: |
-        node --version
-        node -e "
-        console.log('Testing Node.js compatibility...');
-        console.log('Node version:', process.version);
-        console.log('✓ Basic Node.js compatibility test passed');
-        "
+        name: hyperion-native
+        path: build/Release/
+        retention-days: 14

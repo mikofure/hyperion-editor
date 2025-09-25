@@ -6,9 +6,7 @@
 // Copyright 2025 by Ariz Kamizuki <ariz@mikofure.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef AUTOCOMPLETE_HPP
-#define AUTOCOMPLETE_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 /**
@@ -96,4 +94,3 @@ public:
 
 }
 
-#endif

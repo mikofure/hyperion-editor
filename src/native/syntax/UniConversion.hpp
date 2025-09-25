@@ -5,9 +5,7 @@
 // Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef UNICONVERSION_HPP
-#define UNICONVERSION_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 constexpr int UTF8MaxBytes = 4;
@@ -112,5 +110,3 @@ constexpr unsigned int UTF16LengthFromUTF8ByteCount(unsigned int byteCount) noex
 }
 
 }
-
-#endif

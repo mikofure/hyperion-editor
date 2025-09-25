@@ -4,8 +4,12 @@
 // Copyright 1998-2007 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef DECORATION_HPP
-#define DECORATION_HPP
+#pragma once
+#include <vector>
+#include <map>
+#include <string>
+
+#include "../core/RunStyles.hpp"
 
 namespace Hyperion::Internal {
 
@@ -55,5 +59,3 @@ std::unique_ptr<IDecoration> DecorationCreate(bool largeDocument, int indicator)
 std::unique_ptr<IDecorationList> DecorationListCreate(bool largeDocument);
 
 }
-
-#endif

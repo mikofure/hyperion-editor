@@ -6,9 +6,7 @@
 // Copyright 1998-2009 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef DEBUGGING_HPP
-#define DEBUGGING_HPP
-
+#pragma once
 namespace Hyperion::Internal {
 
 #if defined(__clang__)
@@ -40,5 +38,3 @@ void Assert(const char *c, const char *file, int line) noexcept CLANG_ANALYZER_N
 #endif
 
 }
-
-#endif

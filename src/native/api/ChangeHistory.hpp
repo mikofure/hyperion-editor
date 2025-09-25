@@ -5,8 +5,14 @@
 // Copyright 2022 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef CHANGEHISTORY_HPP
-#define CHANGEHISTORY_HPP
+#pragma once
+#include <vector>
+#include <map>
+#include <string>
+#include <memory>
+
+#include "../core/RunStyles.hpp"
+#include "../platform/SparseVector.hpp"
 
 namespace Hyperion::Internal {
 
@@ -120,5 +126,3 @@ public:
 };
 
 }
-
-#endif

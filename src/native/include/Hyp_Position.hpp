@@ -6,9 +6,7 @@
 // Copyright 2015 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef SCI_POSITION_HPP
-#define SCI_POSITION_HPP
-
+#pragma once
 #include <stddef.h>
 
 // Basic signed type used throughout interface
@@ -24,6 +22,4 @@ typedef long Sci_PositionCR;
 	#define SCI_METHOD __stdcall
 #else
 	#define SCI_METHOD
-#endif
-
 #endif

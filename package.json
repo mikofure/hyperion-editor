@@ -2,9 +2,9 @@
   "name": "mikoeditor",
   "version": "1.0.0",
   "description": "A modern text editor library built with TypeScript",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/webrender/index.js",
+  "module": "dist/webrender/index.js",
+  "types": "dist/webrender/ndex.d.ts",
   "type": "module",
   "private": false,
   "files": [
@@ -15,6 +15,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
+    "build:demo": "vite build",
     "test": "echo \"Tests not configured yet\"",
     "example": "echo \"See src/test/example.ts for usage examples\""
   },

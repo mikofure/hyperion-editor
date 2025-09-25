@@ -5,8 +5,16 @@
 // Copyright 1998-2011 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#ifndef DOCUMENT_HPP
-#define DOCUMENT_HPP
+#pragma once
+#include <vector>
+#include <map>
+#include <string>
+#include <memory>
+
+#include "PerLine.hpp"
+#include "Range.hpp"
+#include "../view/Decoration.hpp"
+#include "../view/PositionCache.hpp"
 
 namespace Hyperion::Internal {
 
@@ -19,79 +27,6 @@ class LineState;
 class LineAnnotation;
 
 enum class EncodingFamily { eightBit, unicode, dbcs };
-
-/**
- * The range class represents a range of text in a document.
- * The two values are not sorted as one end may be more significant than the other
- * as is the case for the selection where the end position is the position of the caret.
- * If either position is invalidPosition then the range is invalid and most operations will fail.
- */
-class Range {
-public:
-	Sci::Position start;
-	Sci::Position end;
-
-	explicit Range(Sci::Position pos=0) noexcept :
-		start(pos), end(pos) {
-	}
-	Range(Sci::Position start_, Sci::Position end_) noexcept :
-		start(start_), end(end_) {
-	}
-
-	bool operator==(const Range &other) const noexcept {
-		return (start == other.start) && (end == other.end);
-	}
-
-	bool Valid() const noexcept {
-		return (start != Sci::invalidPosition) && (end != Sci::invalidPosition);
-	}
-
-	[[nodiscard]] bool Empty() const noexcept {
-		return start == end;
-	}
-
-	[[nodiscard]] Sci::Position Length() const noexcept {
-		return (start <= end) ? (end - start) : (start - end);
-	}
-
-	Sci::Position First() const noexcept {
-		return (start <= end) ? start : end;
-	}
-
-	Sci::Position Last() const noexcept {
-		return (start > end) ? start : end;
-	}
-
-	// Is the position within the range?
-	bool Contains(Sci::Position pos) const noexcept {
-		if (start < end) {
-			return (pos >= start && pos <= end);
-		} else {
-			return (pos <= start && pos >= end);
-		}
-	}
-
-	// Is the character after pos within the range?
-	bool ContainsCharacter(Sci::Position pos) const noexcept {
-		if (start < end) {
-			return (pos >= start && pos < end);
-		} else {
-			return (pos < start && pos >= end);
-		}
-	}
-
-	bool Contains(Range other) const noexcept {
-		return Contains(other.start) && Contains(other.end);
-	}
-
-	bool Overlaps(Range other) const noexcept {
-		return
-		Contains(other.start) ||
-		Contains(other.end) ||
-		other.Contains(start) ||
-		other.Contains(end);
-	}
-};
 
 /**
  * Interface class for regular expression searching
@@ -694,5 +629,3 @@ public:
 };
 
 }
-
-#endif
